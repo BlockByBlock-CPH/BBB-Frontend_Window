@@ -30,30 +30,77 @@ class HomeContainer extends Component {
           appTitleHeader: 'BlockByBlock',
           titleRP: 'More information',
           searched: false,
-          dataBC: null
+          dataMC: null,
+          dataTH: null
         };
     }
 
     componentDidUpdate(prevProps) {
-        //Typical usage (don't forget to compare props):
-        if(this.props.gdBarChart !== prevProps.gdBarChart) {
-            this.dataBarChart(this.props.gdBarChart);
+        if(this.props.main_chart !== prevProps.main_chart) {
+            this.dataMainChart(this.props.main_chart);
+        } else if(this.props.table_home !== prevProps.table_home){
+            this.dataTableHome(this.props.table_home);
         }
     }
 
-    dataBarChart = (data) => {      
-        const dataInfo = data;
-        let series = [];
-        let labels = [];
-        let title = '';
-
-        dataInfo.features.map(d => {
-            series.push(d.properties.people);
-            labels.push(d.properties.hours_act);
-            title = d.properties.name_day;
+    dataMainChart = (data) => {      
+        const dataInfo = data.features;
+        let dataMC = {};
+        // const size = parseInt(Object.keys(dataInfo).length,10);
+        if(this.props.selected_day > 0){    
+            dataMC = dataInfo.map(d => {
+                return {
+                    series: d.properties.people,
+                    labels: d.properties.hours_act,
+                    title: d.properties.name_day
+                }
+            });
+        }else if(this.props.selected_day === 0){
+            dataMC = dataInfo.map(d => {
+                return {
+                    series: d.properties.people,
+                    labels: d.properties.name_day,
+                    title: d.properties.name_day
+                }
+            });
+        }
+        this.setState({ dataMC: dataMC }, () => {
+            console.log("dataMC: ", this.state.dataMC);
         });
-        let dataBC = {series,labels,title};
-        this.setState({ dataBC: dataBC });
+    }
+
+    dataTableHome = (data) => {      
+        const dataInfo = data.features;
+        let dataTH = {};
+        let th = {};
+        let td = {};
+        let id = 0;
+        // const size = parseInt(Object.keys(dataInfo).length,10);
+        if(this.props.selected_day > 0){  
+            id += 1; 
+            td = dataInfo.map(d => {
+                return {
+                    id: id,
+                    day:d.properties.name_day,
+                    hour:d.properties.hours_act,
+                    people:d.properties.count_act
+                };
+            });
+            th = ['','Day','Hour', '# People'];
+            dataTH = {td, th}
+        }else if(this.props.selected_day === 0){
+            td = dataInfo.map(d => {
+                id += 1;
+                return {
+                    id: id,
+                    day: d.properties.name_day,
+                    people: d.properties.people
+                }        
+            });
+            th = ['','Day', '# People'];
+            dataTH = {td, th};
+        }
+        this.setState({ dataTH: dataTH });
     }
 
     handleDrawerOpen = () => {
@@ -83,43 +130,43 @@ class HomeContainer extends Component {
 
         const drawerLeft = (
             <Drawer
-              variant="persistent"
-              anchor={anchorLeft}
-              open={openLeft}
-              classes={{
-                paper: classes.drawerPaper,
-              }}
+                variant="persistent"
+                anchor={anchorLeft}
+                open={openLeft}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
             >
-              <div className={classes.drawerHeader}>
-                  <img className={classes.Logo} alt="logo" src={require('../../../assets/logo.jpg')} />
-                  <IconButton onClick={this.handleDrawerClose}>
-                    <ChevronLeftIcon />
-                      {/* {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />} */}
-                  </IconButton>
-              </div>
-              <Divider />
+                <div className={classes.drawerHeader}>
+                    <img className={classes.Logo} alt="logo" src={require('../../../assets/logo.jpg')} />
+                    <IconButton onClick={this.handleDrawerClose}>
+                        <ChevronLeftIcon />
+                        {/* {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />} */}
+                    </IconButton>
+                </div>
+                <Divider />
                 <FormSearch searchAddress={this.handleClick}/> 
             </Drawer>
           );
       
           const drawerRight = (
             <Drawer
-              variant="persistent"
-              anchor={anchorRight}
-              open={openRight}
-              classes={{
-                paper: classes.drawerPaperRight,
-              }}
+                variant="persistent"
+                anchor={anchorRight}
+                open={openRight}
+                classes={{
+                    paper: classes.drawerPaperRight,
+                }}
             >
-              <div className={classes.drawerHeaderRight}>
-                <Typography className={classes.Typography} variant="subtitle1" noWrap>
-                  {titleRP}
-                </Typography>
-              </div>
+                <div className={classes.drawerHeaderRight}>
+                    <Typography className={classes.Typography} variant="subtitle1" noWrap>
+                    {titleRP}
+                    </Typography>
+                </div>
       
-              <Divider />  
-      
-              <RightContent />
+                <Divider />  
+        
+                <RightContent dataTH={this.state.dataTH}/>
       
             </Drawer>
           );
@@ -161,9 +208,8 @@ class HomeContainer extends Component {
                             setInitMap={this.props.setInitMap}
                             selectedInfo={this.props.selected_info}
                             initialMap={this.props.initial_map}
-                            dataBC={this.state.dataBC}
+                            dataMC={this.state.dataMC}
                         />
-
                     </main>
                         {openRight === false ? null : drawerRight}
                 </div>
@@ -181,9 +227,11 @@ function mapStateToProps(state) {
     return {
         selected_info: state.address.selected_info,
         initial_map: state.map.initial_map,
-        gdBarChart: state.address.geodata
+        main_chart: state.address.main_chart,
+        selected_day: state.address.selected_info.selected_day,
+        table_home: state.address.table_home
     }
-  }
+}
 
 export default withStyles(styles, { withTheme: true })(
     connect(mapStateToProps,{setInitMap,searchAddress})(HomeContainer)

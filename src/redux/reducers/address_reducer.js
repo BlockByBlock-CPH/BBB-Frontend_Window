@@ -1,13 +1,15 @@
 import{ 
     GET_ADDRESS_REQUEST, GET_ADDRESS_SUCCESS, GET_ADDRESS_FAILURE, SELECTED_INFO,
-    GET_GEODATA_REQUEST, GET_GEODATA_SUCCESS, GET_GEODATA_FAILURE
+    GET_MAIN_CHART_REQUEST, GET_MAIN_CHART_SUCCESS, GET_MAIN_CHART_FAILURE,
+    GET_TABLE_HOME_REQUEST,GET_TABLE_HOME_SUCCESS, GET_TABLE_HOME_FAILURE
 
 } from '../../constants/action_types';
   
   const initialState = {
       info_address: {},
-      selected_info: null,
-      geodata: {},
+      selected_info: 0,
+      main_chart: {},
+      table_home: {},
       loading: false,
       loaded: false,
       error: null
@@ -65,23 +67,47 @@ import{
                     selected_info: payload
                 }       
             
-                case GET_GEODATA_REQUEST:    
+            case GET_MAIN_CHART_REQUEST:    
                 return {
                     ...state,
                     loading: true,
                     loaded: false
                 }
     
-            case GET_GEODATA_SUCCESS:
+            case GET_MAIN_CHART_SUCCESS:
                 return {
                     ...state,
-                    geodata: payload,
+                    main_chart: payload,
                     loading: false,
                     loaded: true,
                     error: null
                 }   
     
-            case GET_GEODATA_FAILURE:
+            case GET_MAIN_CHART_FAILURE:
+                return {
+                    ...state,
+                    loading: false,
+                    loaded: true,
+                    error: payload
+                }
+            
+            case GET_TABLE_HOME_REQUEST:    
+                return {
+                    ...state,
+                    loading: true,
+                    loaded: false
+                }
+    
+            case GET_TABLE_HOME_SUCCESS:
+                return {
+                    ...state,
+                    table_home: payload,
+                    loading: false,
+                    loaded: true,
+                    error: null
+                }   
+    
+            case GET_TABLE_HOME_FAILURE:
                 return {
                     ...state,
                     loading: false,

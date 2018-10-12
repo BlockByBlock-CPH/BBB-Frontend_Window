@@ -35,7 +35,7 @@ class FormSearch extends Component {
                     select 
                     value={this.state.day_value}
                     onChange={this.handleChange}
-                    label="Select Day" 
+                    label="" 
                     helperText="" 
                     margin="normal"
                     fullWidth={true}

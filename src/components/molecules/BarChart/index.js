@@ -3,13 +3,13 @@ import { Bar } from 'react-chartjs-2';
 import './styles.css';
 
 const BarChart = (props) => {  
-    const { dataBC } = props;
+    const { dataMC } = props;
     
     const data = {
-        labels: dataBC.labels,
+        labels: dataMC.map(d => {return(d.labels)}),
         datasets: [
             {
-                label: dataBC.title,
+                label: dataMC[0].title,
                 backgroundColor: [
                     'rgba(255,99,132,0.2)',
                     'rgba(255,99,132,0.2)',
@@ -40,7 +40,7 @@ const BarChart = (props) => {
                 borderWidth: 1,
                 hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                 hoverBorderColor: 'rgba(255,99,132,1)',
-                data: dataBC.series
+                data: dataMC.map(d => {return( d.series)}),
             }
         ]
     };

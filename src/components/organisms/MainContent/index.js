@@ -14,7 +14,7 @@ import { styles } from './styles';
 class MainContent extends Component {
     render(){
 
-        const { classes, searched, setInitMap, selectedInfo, initialMap, dataBC } = this.props;
+        const { classes, searched, setInitMap, selectedInfo, initialMap, dataMC } = this.props;
 
         return(
             <Grid container>
@@ -30,7 +30,7 @@ class MainContent extends Component {
                         </Paper>
                         <Paper className={classes.PaperChart} style={{ height: '40vh'}}>
                         {    
-                            dataBC === null ? 'SPINNER' : <BarChart dataBC={dataBC} />
+                            dataMC === null ? 'SPINNER' : <BarChart dataMC={dataMC} />
                         }                       
                         </Paper>
                     </Grid> 

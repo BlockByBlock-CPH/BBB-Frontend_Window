@@ -29,12 +29,12 @@ class RightContent extends Component {
 
   render(){
 
-    const { classes } = this.props;
+    const { classes, dataTH } = this.props;
 
     return (
         <Grid item sm={12}>
             <Paper className={classes.Paper}>
-                <TableBBB />
+                <TableBBB dataTH={dataTH} />
             </Paper>
             <Paper className={classes.PaperButton}>
                 <Button 
