@@ -98,7 +98,16 @@ export const styles = theme => ({
     maxWidth: '20%',
     maxHeight: '20%',
   },
-  Typography:{
+  Typography: {
     color: '#FFFFFF'
+  },
+  PaperSpinner: {
+    height: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  TypographySpinner: {
+    color: '#000000'
   }
 });

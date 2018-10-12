@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Drawer, AppBar, Toolbar, Typography, Divider, IconButton } from '@material-ui/core';
+import { Drawer, AppBar, Toolbar, Typography, Divider, IconButton, Paper, CircularProgress } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
@@ -31,8 +31,15 @@ class HomeContainer extends Component {
           titleRP: 'More information',
           searched: false,
           dataMC: null,
-          dataTH: null
+          dataTH: null,
+          loading: true
         };
+    }
+
+    componentDidMount(){
+        setTimeout(function() {
+            this.setState({ loading: false });
+        }.bind(this), 1000)
     }
 
     componentDidUpdate(prevProps) {
@@ -64,9 +71,7 @@ class HomeContainer extends Component {
                 }
             });
         }
-        this.setState({ dataMC: dataMC }, () => {
-            console.log("dataMC: ", this.state.dataMC);
-        });
+        this.setState({ dataMC: dataMC });
     }
 
     dataTableHome = (data) => {      
@@ -76,9 +81,9 @@ class HomeContainer extends Component {
         let td = {};
         let id = 0;
         // const size = parseInt(Object.keys(dataInfo).length,10);
-        if(this.props.selected_day > 0){  
-            id += 1; 
+        if(this.props.selected_day > 0){
             td = dataInfo.map(d => {
+                id += 1; 
                 return {
                     id: id,
                     day:d.properties.name_day,
@@ -147,9 +152,9 @@ class HomeContainer extends Component {
                 <Divider />
                 <FormSearch searchAddress={this.handleClick}/> 
             </Drawer>
-          );
+        );
       
-          const drawerRight = (
+        const drawerRight = (
             <Drawer
                 variant="persistent"
                 anchor={anchorRight}
@@ -163,13 +168,21 @@ class HomeContainer extends Component {
                     {titleRP}
                     </Typography>
                 </div>
-      
+        
                 <Divider />  
         
                 <RightContent dataTH={this.state.dataTH}/>
-      
+        
             </Drawer>
-          );
+        );
+
+        if(this.state.loading === true){
+            return (
+                <Paper className={classes.PaperSpinner}>
+                    <CircularProgress className={classes.progress} size={50} />
+                </Paper>
+            );
+        }
 
         return (
             <div className={classes.root}>        

@@ -4,7 +4,10 @@ export const styles = (theme) => ({
         marginTop: 5,
         marginBottom: 5,
         marginLeft: 5,
-        marginRight: 5
+        marginRight: 5,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     PaperButton: {
         padding: 10,

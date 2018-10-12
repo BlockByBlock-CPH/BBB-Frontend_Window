@@ -13,10 +13,6 @@ import { styles } from './styles';
 const TableBBB = (props) => {
 
     const { classes, dataTH } = props;
-
-    if(dataTH === null){
-        return <div>SPINNER</div>;
-    }
     return (
         <Table className={classes.Table}>
             <TableHead>

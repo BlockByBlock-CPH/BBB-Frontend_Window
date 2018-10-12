@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Paper } from '@material-ui/core';
+import { Grid, Paper, CircularProgress } from '@material-ui/core';
 
 //Components
 import Map from '../../molecules/Map';
@@ -30,7 +30,7 @@ class MainContent extends Component {
                         </Paper>
                         <Paper className={classes.PaperChart} style={{ height: '40vh'}}>
                         {    
-                            dataMC === null ? 'SPINNER' : <BarChart dataMC={dataMC} />
+                            dataMC === null ? <CircularProgress className={classes.progress} size={50} /> : <BarChart dataMC={dataMC} />
                         }                       
                         </Paper>
                     </Grid> 

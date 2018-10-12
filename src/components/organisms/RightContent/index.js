@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Paper, Button, Modal, Typography } from '@material-ui/core';
+import { Grid, Paper, Button, Modal, Typography, CircularProgress } from '@material-ui/core';
 
 //Components
 import TableBBB from '../../molecules/Table';
@@ -34,7 +34,9 @@ class RightContent extends Component {
     return (
         <Grid item sm={12}>
             <Paper className={classes.Paper}>
-                <TableBBB dataTH={dataTH} />
+            {
+                dataTH === null ? <CircularProgress className={classes.progress} size={50} /> : <TableBBB dataTH={dataTH} />
+            }
             </Paper>
             <Paper className={classes.PaperButton}>
                 <Button 
