@@ -1,15 +1,17 @@
 import{ 
     GET_ADDRESS_REQUEST, GET_ADDRESS_SUCCESS, GET_ADDRESS_FAILURE, SELECTED_INFO,
     GET_MAIN_CHART_REQUEST, GET_MAIN_CHART_SUCCESS, GET_MAIN_CHART_FAILURE,
-    GET_TABLE_HOME_REQUEST,GET_TABLE_HOME_SUCCESS, GET_TABLE_HOME_FAILURE
+    GET_TABLE_HOME_REQUEST,GET_TABLE_HOME_SUCCESS, GET_TABLE_HOME_FAILURE,
+    GET_TOP_REQUEST, GET_TOP_SUCCESS, GET_TOP_FAILURE
 
 } from '../../constants/action_types';
   
   const initialState = {
-      info_address: {},
-      selected_info: 0,
-      main_chart: {},
-      table_home: {},
+      infoAddress: {},
+      selectedInfo: {},
+      mainChart: {},
+      tableHome: {},
+      dataTop: {},
       loading: false,
       loaded: false,
       error: null
@@ -29,7 +31,7 @@ import{
             case GET_ADDRESS_SUCCESS:
                 return {
                     ...state,
-                    info_address: payload.data.features.map(res => {
+                    infoAddress: payload.data.features.map(res => {
                         return {
                             lon:res.geometry.coordinates[0],
                             lat:res.geometry.coordinates[1],
@@ -64,7 +66,7 @@ import{
             case SELECTED_INFO:
                 return {
                     ...state,
-                    selected_info: payload
+                    selectedInfo: payload
                 }       
             
             case GET_MAIN_CHART_REQUEST:    
@@ -77,7 +79,7 @@ import{
             case GET_MAIN_CHART_SUCCESS:
                 return {
                     ...state,
-                    main_chart: payload,
+                    mainChart: payload,
                     loading: false,
                     loaded: true,
                     error: null
@@ -101,13 +103,37 @@ import{
             case GET_TABLE_HOME_SUCCESS:
                 return {
                     ...state,
-                    table_home: payload,
+                    tableHome: payload,
                     loading: false,
                     loaded: true,
                     error: null
                 }   
     
             case GET_TABLE_HOME_FAILURE:
+                return {
+                    ...state,
+                    loading: false,
+                    loaded: true,
+                    error: payload
+                }
+            
+            case GET_TOP_REQUEST:    
+                return {
+                    ...state,
+                    loading: true,
+                    loaded: false
+                }
+    
+            case GET_TOP_SUCCESS:
+                return {
+                    ...state,
+                    dataTop: payload,
+                    loading: false,
+                    loaded: true,
+                    error: null
+                }   
+    
+            case GET_TOP_FAILURE:
                 return {
                     ...state,
                     loading: false,

@@ -1,13 +1,13 @@
 import { INITIAL_MAP } from '../../constants/action_types';
 
 
-export function setInitMap(map, view, base_layer) {
+export function setInitMap(map, view, baseLayer) {
     return (dispatch) => {
-        const initital_map = {
+        const inititalMap = {
             view: view,
-            base_layer: base_layer,
+            baseLayer: baseLayer,
             map: map
         }
-        dispatch({ type: INITIAL_MAP, payload: initital_map });
+        dispatch({ type: INITIAL_MAP, payload: inititalMap });
     }
 }

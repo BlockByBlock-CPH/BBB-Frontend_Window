@@ -1,7 +1,7 @@
 import{ INITIAL_MAP } from '../../constants/action_types';
   
     const initialState = {
-        initial_map: {}
+        initialMap: {}
     }
     
     export default (state = initialState, action) => {
@@ -11,7 +11,7 @@ import{ INITIAL_MAP } from '../../constants/action_types';
             case INITIAL_MAP:
                 return {
                     ...state,
-                    initial_map: payload
+                    initialMap: payload
                 }       
         
             default:

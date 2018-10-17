@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Drawer, AppBar, Toolbar, Typography, Divider, IconButton, Paper, CircularProgress } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { Paper } from '@material-ui/core';
 
 //Components
 import MainContent from '../../organisms/MainContent';
-import RightContent from '../../organisms/RightContent';
-import FormSearch from '../../molecules/FormSearch';
+import DrawerLeft from '../../organisms/DrawerLeft';
+import DrawerRight from '../../organisms/DrawerRight';
+import Spinner from '../../atoms/Spinner';
+import NavBar from '../../molecules/NavBar';
 
 //Actions
 import { setInitMap } from '../../../redux/actions/map_action';
@@ -30,8 +30,9 @@ class HomeContainer extends Component {
           appTitleHeader: 'BlockByBlock',
           titleRP: 'More information',
           searched: false,
-          dataMC: null,
-          dataTH: null,
+          dataMC: {},
+          dataTH: {},
+          dataTop: {},
           loading: true
         };
     }
@@ -39,14 +40,16 @@ class HomeContainer extends Component {
     componentDidMount(){
         setTimeout(function() {
             this.setState({ loading: false });
-        }.bind(this), 1000)
+        }.bind(this), 1500)
     }
 
     componentDidUpdate(prevProps) {
-        if(this.props.main_chart !== prevProps.main_chart) {
-            this.dataMainChart(this.props.main_chart);
-        } else if(this.props.table_home !== prevProps.table_home){
-            this.dataTableHome(this.props.table_home);
+        if(this.props.mainChart !== prevProps.mainChart) {
+            this.dataMainChart(this.props.mainChart);
+        } else if(this.props.tableHome !== prevProps.tableHome){
+            this.dataTableHome(this.props.tableHome);
+        } else if(this.props.dataTop !== prevProps.dataTop){
+            this.dataTop(this.props.dataTop);
         }
     }
 
@@ -54,7 +57,7 @@ class HomeContainer extends Component {
         const dataInfo = data.features;
         let dataMC = {};
         // const size = parseInt(Object.keys(dataInfo).length,10);
-        if(this.props.selected_day > 0){    
+        if(this.props.selectedDay > 0){    
             dataMC = dataInfo.map(d => {
                 return {
                     series: d.properties.people,
@@ -62,7 +65,7 @@ class HomeContainer extends Component {
                     title: d.properties.name_day
                 }
             });
-        }else if(this.props.selected_day === 0){
+        }else if(this.props.selectedDay === 0){
             dataMC = dataInfo.map(d => {
                 return {
                     series: d.properties.people,
@@ -71,6 +74,7 @@ class HomeContainer extends Component {
                 }
             });
         }
+
         this.setState({ dataMC: dataMC });
     }
 
@@ -81,7 +85,7 @@ class HomeContainer extends Component {
         let td = {};
         let id = 0;
         // const size = parseInt(Object.keys(dataInfo).length,10);
-        if(this.props.selected_day > 0){
+        if(this.props.selectedDay > 0){
             td = dataInfo.map(d => {
                 id += 1; 
                 return {
@@ -93,7 +97,7 @@ class HomeContainer extends Component {
             });
             th = ['','Day','Hour', '# People'];
             dataTH = {td, th}
-        }else if(this.props.selected_day === 0){
+        }else if(this.props.selectedDay === 0){
             td = dataInfo.map(d => {
                 id += 1;
                 return {
@@ -105,7 +109,35 @@ class HomeContainer extends Component {
             th = ['','Day', '# People'];
             dataTH = {td, th};
         }
+        
         this.setState({ dataTH: dataTH });
+    }
+
+
+    dataTop = (data) => {      
+        const dataInfo1 = data.chart1.features;
+        const dataInfo2 = data.chart2.features;
+        let dataChartTop1 = {};
+        let dataChartTop2 = {};
+        // const size = parseInt(Object.keys(dataInfo).length,10);
+          
+        dataChartTop1 = dataInfo1.map(d => {
+            return {
+                labels: d.properties.id,
+                series: d.properties.people,
+                title: 'Top Max People by Zone'
+            }
+        });
+
+        dataChartTop2 = dataInfo2.map(d => {
+            return {
+                labels: d.properties.id,
+                series: d.properties.people,
+                title: 'Top Min People by Zone'
+            }
+        });
+        
+        this.setState({ dataTop: { dataChartTop1, dataChartTop2 }});
     }
 
     handleDrawerOpen = () => {
@@ -118,9 +150,9 @@ class HomeContainer extends Component {
 
     handleClick = (event) => {
         event.preventDefault();
-        const address = event.target.search_address.value;
-        const selected_day = event.target.select_day.value;
-        this.props.searchAddress(address, selected_day);  
+        const address = event.target.searchAddress.value;
+        const selectedDay = event.target.selectDay.value;
+        this.props.searchAddress(address, selectedDay);  
         this.setState({
             searched: true,
             openRight: true,
@@ -133,53 +165,10 @@ class HomeContainer extends Component {
         const { classes } = this.props;
         const { anchorLeft, openLeft, anchorRight, openRight, appTitleHeader, titleRP } = this.state;
 
-        const drawerLeft = (
-            <Drawer
-                variant="persistent"
-                anchor={anchorLeft}
-                open={openLeft}
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-            >
-                <div className={classes.drawerHeader}>
-                    <img className={classes.Logo} alt="logo" src={require('../../../assets/logo.jpg')} />
-                    <IconButton onClick={this.handleDrawerClose}>
-                        <ChevronLeftIcon />
-                        {/* {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />} */}
-                    </IconButton>
-                </div>
-                <Divider />
-                <FormSearch searchAddress={this.handleClick}/> 
-            </Drawer>
-        );
-      
-        const drawerRight = (
-            <Drawer
-                variant="persistent"
-                anchor={anchorRight}
-                open={openRight}
-                classes={{
-                    paper: classes.drawerPaperRight,
-                }}
-            >
-                <div className={classes.drawerHeaderRight}>
-                    <Typography className={classes.Typography} variant="subtitle1" noWrap>
-                    {titleRP}
-                    </Typography>
-                </div>
-        
-                <Divider />  
-        
-                <RightContent dataTH={this.state.dataTH}/>
-        
-            </Drawer>
-        );
-
         if(this.state.loading === true){
             return (
                 <Paper className={classes.PaperSpinner}>
-                    <CircularProgress className={classes.progress} size={50} />
+                    <Spinner />
                 </Paper>
             );
         }
@@ -187,27 +176,18 @@ class HomeContainer extends Component {
         return (
             <div className={classes.root}>        
                 <div className={classes.appFrame}>
-                    <AppBar
-                        className={classNames(classes.appBar, {
-                        [classes.appBarShift]: openLeft,
-                        [classes[`appBarShift-${anchorLeft}`]]: openLeft,
-                        })}
-                    >
-                        <Toolbar disableGutters={!openLeft}>
-                            <IconButton
-                                color="inherit"
-                                aria-label="Open drawer"
-                                onClick={this.handleDrawerOpen}
-                                className={classNames(classes.menuButton, openLeft && classes.hide)}
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                            <Typography className={classes.Typography} variant="h4" noWrap>
-                                {appTitleHeader}
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
-                        {drawerLeft}
+                    <NavBar 
+                        open={openLeft}
+                        anchor={anchorLeft}
+                        handleDrawerOpen={this.handleDrawerOpen}
+                        title={appTitleHeader}
+                    />
+                    <DrawerLeft 
+                        anchor={anchorLeft}
+                        open={openLeft}
+                        handleDrawerClose={this.handleDrawerClose}
+                        searchAddress={this.handleClick}
+                    />
                     <main
                         className={classNames(classes.content, classes[`content-${anchorLeft}`], {
                         [classes.contentShift]: openLeft,
@@ -219,12 +199,21 @@ class HomeContainer extends Component {
                         <MainContent 
                             searched={this.state.searched} 
                             setInitMap={this.props.setInitMap}
-                            selectedInfo={this.props.selected_info}
-                            initialMap={this.props.initial_map}
+                            selectedInfo={this.props.selectedInfo}
+                            initialMap={this.props.initialMap}
                             dataMC={this.state.dataMC}
                         />
                     </main>
-                        {openRight === false ? null : drawerRight}
+                    { 
+                        openRight === false ? null : 
+                            <DrawerRight 
+                                title={titleRP} 
+                                anchor={anchorRight} 
+                                open={openRight} 
+                                dataTH={this.state.dataTH}
+                                dataTop={this.state.dataTop}
+                            /> 
+                    }
                 </div>
             </div>
         )
@@ -238,11 +227,12 @@ HomeContainer.propTypes = {
   
 function mapStateToProps(state) {
     return {
-        selected_info: state.address.selected_info,
-        initial_map: state.map.initial_map,
-        main_chart: state.address.main_chart,
-        selected_day: state.address.selected_info.selected_day,
-        table_home: state.address.table_home
+        selectedInfo: state.address.selectedInfo,
+        initialMap: state.map.initialMap,
+        mainChart: state.address.mainChart,
+        selectedDay: state.address.selectedInfo.selectedDay,
+        tableHome: state.address.tableHome,
+        dataTop: state.address.dataTop
     }
 }
 

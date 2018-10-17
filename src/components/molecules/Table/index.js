@@ -20,7 +20,7 @@ const TableBBB = (props) => {
                 {
                     dataTH.th.map(title => {
                         return(
-                            <TableCell className={classes.TableCell}>
+                            <TableCell key={title} className={classes.TableCell}>
                                 {title}
                             </TableCell>
                         );
@@ -39,7 +39,9 @@ const TableBBB = (props) => {
                             }
                             </TableCell>
                             <TableCell className={classes.TableCell} numeric>{row.day}</TableCell>
-                            <TableCell className={classes.TableCell} numeric>{row.hour}</TableCell>
+                            {
+                                row.hour ? <TableCell className={classes.TableCell} numeric>{row.hour}</TableCell> : null
+                            }
                             <TableCell className={classes.TableCell} numeric>{row.people}</TableCell>
                         </TableRow>
                     );

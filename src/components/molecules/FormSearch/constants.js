@@ -1,4 +1,4 @@
-export const list_days = [
+export const listDays = [
     {
       value: 0,
       label: 'Select day'

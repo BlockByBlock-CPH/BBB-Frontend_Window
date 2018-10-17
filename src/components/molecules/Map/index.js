@@ -52,7 +52,7 @@ class MapBBB extends Component {
     componentDidUpdate(prevProps) {
         //Typical usage (don't forget to compare props):
         if(this.props.selectedInfo !== prevProps.selectedInfo) {
-            this.createCircleLayer(this.props.selectedInfo.coord_address);
+            this.createCircleLayer(this.props.selectedInfo.coordAddress);
             // console.log("Selected_info map: ", this.props.selectedInfo);
         }
     }
@@ -72,7 +72,7 @@ class MapBBB extends Component {
             minZoom: this.state.minZoom
         });
 
-        const base_layer = new TileLayer({
+        const baseLayer = new TileLayer({
             title: 'OSM',
             type: 'base',
             visible: true,
@@ -92,16 +92,16 @@ class MapBBB extends Component {
                 mouseWheelZoom: false
             }),
             renderer: 'canvas',
-            layers: [base_layer],
+            layers: [baseLayer],
             view: view
         });
 
-        this.props.setInitMap(map,view,base_layer); 
+        this.props.setInitMap(map,view,baseLayer); 
     };
 
     //Create a new circle layer (vectorlayer)
     createCircleLayer = (coord) => {
-        const center = transform([coord.long_address,coord.lat_address], 'EPSG:4326', 'EPSG:3857');       
+        const center = transform([coord.longAddress,coord.latAddress], 'EPSG:4326', 'EPSG:3857');       
         const circle = new Circle(
             center,
             20
@@ -153,6 +153,8 @@ class MapBBB extends Component {
     //Remove old layers (Address)  
     removeOldAddress = () => {   
         const map = this.props.initialMap.map;
+
+        //FIX: change to a object {} and manage with map.layersToRemove
         let layersToRemove = [];
         map.getLayers().forEach(function (layer) {
             layersToRemove.push(layer);        

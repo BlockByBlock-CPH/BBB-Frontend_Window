@@ -4,20 +4,20 @@ import { withStyles } from '@material-ui/core/styles';
 import { Button, TextField, MenuItem } from '@material-ui/core';
 
 import { styles } from './styles';
-import { list_days } from './constants';
+import { listDays } from './constants';
 
 class FormSearch extends Component {
     constructor(props){
         super(props);
         this.state = {
-            day_value: 0,
+            dayValue: 0,
         }
 
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange = (event) => {
-        this.setState({day_value: event.target.value});
+        this.setState({dayValue: event.target.value});
     }
     
     render() {
@@ -29,20 +29,20 @@ class FormSearch extends Component {
                     label="Search Address"
                     margin="normal"
                     fullWidth={true} 
-                    id="search_address"               
+                    id="searchAddress"               
                 />
                 <TextField 
                     select 
-                    value={this.state.day_value}
+                    value={this.state.dayValue}
                     onChange={this.handleChange}
                     label="" 
                     helperText="" 
                     margin="normal"
                     fullWidth={true}
-                    id="select_day"
+                    id="selectDay"
                 >
                 {
-                    list_days.map(option => (
+                    listDays.map(option => (
                         <MenuItem key={option.value} value={option.value}>
                             {option.label}
                         </MenuItem>
@@ -53,7 +53,7 @@ class FormSearch extends Component {
                     variant="contained" 
                     color="primary" 
                     type="submit"
-                    id="btn_search"
+                    id="btnSearch"
                 >
                     Search
                 </Button>

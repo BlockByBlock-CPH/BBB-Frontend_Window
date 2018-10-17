@@ -1,57 +1,62 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Paper, CircularProgress } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
 
 //Components
 import Map from '../../molecules/Map';
 import BarChart from '../../molecules/BarChart';
+import Spinner from '../../atoms/Spinner';
 
 //Styles
 import { styles } from './styles';
 
 
-class MainContent extends Component {
-    render(){
+const MainContent = (props) => {
 
-        const { classes, searched, setInitMap, selectedInfo, initialMap, dataMC } = this.props;
+    const { classes, searched, setInitMap, selectedInfo, initialMap, dataMC } = props;
 
-        return(
-            <Grid container>
-            {
-                searched === true ? 
-                    <Grid item sm={12}>
-                        <Paper className={classes.PaperMap} style={{ height: '40vh'}}>    
-                            <Map 
-                                setInitMap={setInitMap}
-                                selectedInfo={selectedInfo}
-                                initialMap={initialMap}
-                            />
-                        </Paper>
-                        <Paper className={classes.PaperChart} style={{ height: '40vh'}}>
-                        {    
-                            dataMC === null ? <CircularProgress className={classes.progress} size={50} /> : <BarChart dataMC={dataMC} />
-                        }                       
-                        </Paper>
-                    </Grid> 
-                    : 
-                    <Grid item sm={12}>
-                        <Paper className={classes.Paper} style={{ height: '82vh'}}>    
-                            <Map 
-                                setInitMap={setInitMap}
-                                selectedInfo={selectedInfo}
-                                initialMap={initialMap}
-                            />
-                        </Paper>
-                    </Grid>
-            }
-            </Grid>
-        );
-    }
+    return(
+        <Grid container>
+        {
+            searched === true ? 
+                <Grid item sm={12}>
+                    <Paper className={classes.PaperMap} style={{ height: '40vh'}}>    
+                        <Map 
+                            setInitMap={setInitMap}
+                            selectedInfo={selectedInfo}
+                            initialMap={initialMap}
+                        />
+                    </Paper>
+                    <Paper className={classes.PaperChart} style={{ height: '40vh'}}>
+                    {    
+                        Object.keys(dataMC).length ? <BarChart dataMC={dataMC} /> : <Spinner /> 
+                    }                       
+                    </Paper>
+                </Grid> 
+                : 
+                <Grid item sm={12}>
+                    <Paper className={classes.Paper} style={{ height: '82vh'}}>    
+                        <Map 
+                            setInitMap={setInitMap}
+                            selectedInfo={selectedInfo}
+                            initialMap={initialMap}
+                        />
+                    </Paper>
+                </Grid>
+        }
+        </Grid>
+    );
 }
 
 MainContent.propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    searched: PropTypes.bool.isRequired,
+    setInitMap: PropTypes.func.isRequired,
+    selectedInfo: PropTypes.object.isRequired,
+    initialMap: PropTypes.object.isRequired,
+    dataMC: PropTypes.object.isRequired
+
 };
 
 
