@@ -48,6 +48,7 @@ class RightContent extends Component {
                     onClick={this.handleOpen}
                 >See more</Button>
             </Paper>
+
             <Modal
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"

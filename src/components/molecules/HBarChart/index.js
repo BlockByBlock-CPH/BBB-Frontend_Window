@@ -13,16 +13,16 @@ const HorizontalBarChart = (props) => {
             {
                 label: dataTop[0].title,
                 backgroundColor: [
-                    'rgba(255,99,132,0.2)',
-                    'rgba(255,99,132,0.2)',
-                    'rgba(255,99,132,0.2)',
-                    'rgba(255,99,132,0.2)',
-                    'rgba(255,99,132,0.2)'
+                    'rgba(0,139,139,0.2)',
+                    'rgba(0,139,139,0.2)',
+                    'rgba(0,139,139,0.2)',
+                    'rgba(0,139,139,0.2)',
+                    'rgba(0,139,139,0.2)'
                 ],
-                borderColor: 'rgba(255,99,132,1)',
+                borderColor: 'rgba(0,139,139,1)',
                 borderWidth: 1,
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
+                hoverBackgroundColor: 'rgba(0,139,139,0.4)',
+                hoverBorderColor: 'rgba(0,139,139,1)',
                 data: dataTop.map(d => {return( d.series)})
             }
         ]

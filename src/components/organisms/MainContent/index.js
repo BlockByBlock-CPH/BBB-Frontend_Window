@@ -36,7 +36,7 @@ const MainContent = (props) => {
                 </Grid> 
                 : 
                 <Grid item sm={12}>
-                    <Paper className={classes.Paper} style={{ height: '82vh'}}>    
+                    <Paper className={classes.Paper} style={{ height: '100vh'}}>    
                         <Map 
                             setInitMap={setInitMap}
                             selectedInfo={selectedInfo}
