@@ -51,7 +51,11 @@ const HorizontalBarChart = (props) => {
          },
          tooltips: {
             enabled: true
-         }
+         },
+         animation: {
+            duration: 1500,
+            easing: 'easeInOutQuint'
+        }   
     };
 
     return(

@@ -11,12 +11,10 @@ const BarChart = (props) => {
     let title;
 
     if(sizeObject === 3){
-        let j = 0;
-        dataset = Object.values(dataMC.series).map(serie => {
-            j+=1;
+        dataset = Object.values(dataMC.series).map((serie, index) => {
             return (   
                 {
-                    label: ''+j+'',
+                    label: ''+index+'',
                     backgroundColor: 'rgba(0,139,139,0.3)',
                     borderColor: 'rgba(0,139,139,1)',
                     borderWidth: 1,
@@ -86,7 +84,7 @@ const BarChart = (props) => {
             text: title
         },
         animation: {
-            duration: 1000,
+            duration: 1500,
             easing: 'easeInOutQuint'
         }     
     };

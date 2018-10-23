@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Paper, Button, Modal, Typography } from '@material-ui/core';
+import { Grid, Paper, Button } from '@material-ui/core';
 
 //Components
+import ModalTop from '../ModalTop';
 import TableBBB from '../../molecules/Table';
-import HBarChart from '../../molecules/HBarChart';
 import Spinner from '../../atoms/Spinner';
 
 //Styles
@@ -49,29 +49,11 @@ class RightContent extends Component {
                 >See more</Button>
             </Paper>
 
-            <Modal
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
+            <ModalTop 
+                dataTop={dataTop}
+                handleClose={this.handleClose}
                 open={this.state.open}
-                onClose={this.handleClose}
-                className={classes.Modal}
-            >
-                <div className={classes.PaperModal}>
-                    <Typography align="center" variant="h5" id="modal-title">
-                        Top 5
-                    </Typography>
-                    <Paper className={classes.Paper}>
-                    {
-                        Object.keys(dataTop).length ? <HBarChart dataTop={dataTop.dataChartTop1} /> : <Spinner />
-                    }
-                    </Paper>
-                    <Paper className={classes.Paper}>
-                    {
-                        Object.keys(dataTop).length ? <HBarChart dataTop={dataTop.dataChartTop2} /> : <Spinner />
-                    }
-                    </Paper>
-                </div>
-            </Modal>
+            />          
         </Grid> 
     )
   }

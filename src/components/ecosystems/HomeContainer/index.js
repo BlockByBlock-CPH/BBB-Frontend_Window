@@ -329,6 +329,8 @@ class HomeContainer extends Component {
         const dataInfo2 = data.chart2.features;
         let dataChartTop1 = {};
         let dataChartTop2 = {};
+
+        console.log("dataTOP: ", dataInfo1);
                   
         dataChartTop1 = dataInfo1.map(d => {
             return {
