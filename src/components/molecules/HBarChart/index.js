@@ -5,27 +5,27 @@ import './styles.css';
 
 const HorizontalBarChart = (props) => {
 
-    const { dataTop } = props;
-
-    const data = {
-        labels: dataTop.map(d => {return(d.labels)}),
-        datasets: [
+    const { dataTC } = props;
+    let legend = false;
+    let labels = Object.values(dataTC.labels).map(label => {return(label)});
+    let title = dataTC.title[0];
+    let dataset = Object.values(dataTC.series).map((serie, index) => {
+        return (   
             {
-                label: dataTop[0].title,
-                backgroundColor: [
-                    'rgba(0,139,139,0.2)',
-                    'rgba(0,139,139,0.2)',
-                    'rgba(0,139,139,0.2)',
-                    'rgba(0,139,139,0.2)',
-                    'rgba(0,139,139,0.2)'
-                ],
+                label: ''+index+'',
+                backgroundColor: 'rgba(0,139,139,0.3)',
                 borderColor: 'rgba(0,139,139,1)',
                 borderWidth: 1,
-                hoverBackgroundColor: 'rgba(0,139,139,0.4)',
+                hoverBackgroundColor: 'rgba(0,139,139,0.7)',
                 hoverBorderColor: 'rgba(0,139,139,1)',
-                data: dataTop.map(d => {return( d.series)})
+                data: Object.values(serie).map(s => {return(s)})
             }
-        ]
+        );
+    });
+    
+    const data = {
+        labels: labels,
+        datasets: dataset        
     };
     
     const options = {
@@ -47,15 +47,19 @@ const HorizontalBarChart = (props) => {
             }]
         },
         legend: {
-            display: true
-         },
-         tooltips: {
+            display: legend
+        },
+        tooltips: {
             enabled: true
-         },
-         animation: {
+        },
+        title: {
+            display: true,
+            text: title
+        },
+        animation: {
             duration: 1500,
             easing: 'easeInOutQuint'
-        }   
+        }     
     };
 
     return(
