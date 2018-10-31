@@ -6,7 +6,8 @@ import {
     GET_TOP_REQUEST, GET_TOP_SUCCESS, GET_TOP_FAILURE
 } from '../../constants/action_types';
 import { 
-    API_PHOTON, WEEK, QUERY14, QUERY_1_2, QUERY_3_4, QUERY17, QUERY18, QUERY17_2, QUERY18_2
+    API_PHOTON, MAIN_CHART_WEEK, MAIN_CHART_DAY, TOP_CHART1_WEEK, TOP_CHART2_WEEK, TOP_CHART1_DAY, TOP_CHART2_DAY,
+    TABLEHOME_WEEK, TABLEHOME_DAY
 } from '../../constants/apis';
 
 
@@ -25,43 +26,27 @@ export function searchAddress(address, selectedDay) {
             const day = parseInt(selectedDay, 10);
             
             if(day === 0){         
-                const params = 'COORD:' + pointAddress;
-                const mainChart = WEEK+params;
-                const tableHome = QUERY_3_4+params;
-                const topChart = [QUERY17,QUERY18];
-                // const query2 = WEEK_HOUR+params;
-                // const query3 = QUERY13+params;
-                // const url_main_chart = [main_chart];
+                const topChart = [TOP_CHART1_WEEK,TOP_CHART2_WEEK];
                 const selectedInfo = { 
                     coordAddress: coordAddress, 
                     pointAddress: pointAddress, 
-                    selectedDay: day, 
-                    mainChart: mainChart,
-                    tableHome: tableHome,
-                    topChart: topChart
+                    selectedDay: day
                 };
                 dispatch({ type: SELECTED_INFO, payload: selectedInfo });
-                dispatch(getDataMainChart(mainChart));
-                dispatch(getDataTableHome(tableHome));
+                dispatch(getDataMainChart(MAIN_CHART_WEEK));
+                dispatch(getDataTableHome(TABLEHOME_WEEK));
                 dispatch(getDataTop(topChart));
     
             }else if(day > 0){
-                const viewparams = ['COORD:' + pointAddress, 'DAY:' + day];
-                const params = viewparams.join(';');
-                const mainChart = QUERY14+params;
-                const tableHome = QUERY_1_2+params;
-                const topChart = [QUERY17_2+'DAY:' + day,QUERY18_2+'DAY:' + day];
+                const topChart = [TOP_CHART1_DAY,TOP_CHART2_DAY];
                 const selectedInfo = { 
                     coordAddress: coordAddress, 
                     pointAddress: pointAddress, 
-                    selectedDay: day, 
-                    mainChart: mainChart,
-                    tableHome: tableHome,
-                    topChart: topChart
+                    selectedDay: day
                 };
                 dispatch({ type: SELECTED_INFO, payload: selectedInfo });
-                dispatch(getDataMainChart(mainChart));
-                dispatch(getDataTableHome(tableHome));
+                dispatch(getDataMainChart(MAIN_CHART_DAY));
+                dispatch(getDataTableHome(TABLEHOME_DAY));
                 dispatch(getDataTop(topChart));
             }           
 
@@ -72,11 +57,11 @@ export function searchAddress(address, selectedDay) {
 }
 
 
-function getDataMainChart(geoURL){
+function getDataMainChart(API_Url){
     return async (dispatch) => {
         dispatch({ type: GET_MAIN_CHART_REQUEST });
         try {
-            const mainChart = await axios.get(geoURL);
+            const mainChart = await axios.get(API_Url);
             dispatch({ type: GET_MAIN_CHART_SUCCESS, payload: mainChart.data });   
         } catch (error) {
             dispatch({ type: GET_MAIN_CHART_FAILURE, payload: error });
@@ -84,11 +69,11 @@ function getDataMainChart(geoURL){
     }
 }
 
-function getDataTableHome(geoURL){
+function getDataTableHome(API_Url){
     return async (dispatch) => {
         dispatch({ type: GET_TABLE_HOME_REQUEST });
         try {
-            const tableHome = await axios.get(geoURL);
+            const tableHome = await axios.get(API_Url);
             dispatch({ type: GET_TABLE_HOME_SUCCESS, payload: tableHome.data });   
         } catch (error) {
             dispatch({ type: GET_TABLE_HOME_FAILURE, payload: error });
@@ -97,12 +82,12 @@ function getDataTableHome(geoURL){
 }
 
 
-function getDataTop(geoURL){
+function getDataTop(API_Url){
     return async (dispatch) => {
         dispatch({ type: GET_TOP_REQUEST });
         try {
-            const chart1 = await axios.get(geoURL[0]);
-            const chart2 = await axios.get(geoURL[1]);
+            const chart1 = await axios.get(API_Url[0]);
+            const chart2 = await axios.get(API_Url[1]);
             const dataTop = {
                 chart1: chart1.data, 
                 chart2: chart2.data
@@ -114,36 +99,3 @@ function getDataTop(geoURL){
         }
     }
 }
-
-
-
-
-
-
-
-
-// function getPolygon(geoURL){
-//     return async (dispatch) => {
-//         dispatch({ type: GET_GEODATA_REQUEST });
-//         try {
-//             const geo_url_len = Object.keys(geoURL).length;
-//             if(geo_url_len === 1){
-//                 const geodata = await axios.get(geoURL);
-//                 dispatch({ type: GET_GEODATA_SUCCESS, payload: geodata.data });   
-//             }else if(geo_url_len > 1){
-//                 const geodata = await axios.get(geoURL[0]);
-//                 const line = await axios.get(geoURL[1]);
-//                 const area = await axios.get(geoURL[2]);
-//                 const geodata = {
-//                     bar: bar.data,
-//                     line: line.data,
-//                     area: area.data                
-//                 }               
-//                 dispatch({ type: GET_GEODATA_SUCCESS, payload: geodata });
-//             }
-
-//         } catch (error) {
-//             dispatch({ type: GET_GEODATA_FAILURE, payload: error });
-//         }
-//     }
-// }
