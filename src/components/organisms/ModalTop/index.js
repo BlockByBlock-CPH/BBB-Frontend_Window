@@ -13,7 +13,7 @@ import { styles } from './styles';
 
 const ModalTop = (props) => {
 
-    const { classes, dataTop, open, handleClose } = props;
+    const { classes, dataTC, open, handleClose } = props;
 
     return (
         <Modal
@@ -29,12 +29,12 @@ const ModalTop = (props) => {
                 </Typography>
                 <Paper className={classes.Paper}>
                 {
-                    Object.keys(dataTop).length ? <HBarChart dataTop={dataTop.dataChartTop1} /> : <Spinner />
+                    Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop1} /> : <Spinner />
                 }
                 </Paper>
                 <Paper className={classes.Paper}>
                 {
-                    Object.keys(dataTop).length ? <HBarChart dataTop={dataTop.dataChartTop2} /> : <Spinner />
+                    Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop2} /> : <Spinner />
                 }
                 </Paper>
                 <Paper className={classes.PaperButton}>
@@ -53,7 +53,7 @@ const ModalTop = (props) => {
 
 ModalTop.propTypes = {
     classes: PropTypes.object.isRequired,
-    dataTop: PropTypes.object.isRequired
+    dataTC: PropTypes.object.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(ModalTop);
