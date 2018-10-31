@@ -30,7 +30,7 @@ class RightContent extends Component {
 
   render(){
 
-    const { classes, dataTH, dataTop } = this.props;
+    const { classes, dataTH, dataTC } = this.props;
 
     return (
         <Grid item sm={12}>
@@ -50,7 +50,7 @@ class RightContent extends Component {
             </Paper>
 
             <ModalTop 
-                dataTop={dataTop}
+                dataTC={dataTC}
                 handleClose={this.handleClose}
                 open={this.state.open}
             />          
@@ -62,7 +62,7 @@ class RightContent extends Component {
 RightContent.propTypes = {
     classes: PropTypes.object.isRequired,
     dataTH: PropTypes.object.isRequired,
-    dataTop: PropTypes.object.isRequired
+    dataTC: PropTypes.object.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(RightContent);
