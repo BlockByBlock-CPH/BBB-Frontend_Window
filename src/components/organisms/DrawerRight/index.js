@@ -11,7 +11,7 @@ import DrawerHeaderRight from '../../molecules/DrawerHeaderRight';
 import { styles } from './styles';
 
 const DrawerRight = (props) => {
-    const { classes, anchor, open, title, dataTH, dataTop } = props;
+    const { classes, anchor, open, title, dataTH, dataTC } = props;
     return (
         <Drawer
             variant="persistent"
@@ -27,7 +27,7 @@ const DrawerRight = (props) => {
     
             <RightContent 
                 dataTH={dataTH} 
-                dataTop={dataTop}
+                dataTC={dataTC}
             />
     
         </Drawer>
@@ -42,7 +42,7 @@ DrawerRight.propTypes = {
     open: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
     dataTH: PropTypes.object.isRequired,
-    dataTop: PropTypes.object.isRequired
+    dataTC: PropTypes.object.isRequired
 
 };
 
