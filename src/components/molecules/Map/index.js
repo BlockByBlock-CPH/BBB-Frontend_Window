@@ -23,6 +23,7 @@ class MapBBB extends Component {
             zoom:8,
             maxZoom: 20,
             minZoom: 2,
+            radius: 20
         }
         this.createMap = this.createMap.bind(this);
         this.createCenterPoint = this.createCenterPoint.bind(this);
@@ -51,8 +52,8 @@ class MapBBB extends Component {
 
     componentDidUpdate(prevProps) {
         //Typical usage (don't forget to compare props):
-        if(this.props.selectedInfo !== prevProps.selectedInfo) {
-            this.createCircleLayer(this.props.selectedInfo.coordAddress);
+        if(this.props.coordAddress !== prevProps.coordAddress) {
+            this.createCircleLayer(this.props.coordAddress);
             // console.log("Selected_info map: ", this.props.selectedInfo);
         }
     }
@@ -104,7 +105,7 @@ class MapBBB extends Component {
         const center = transform([coord.longAddress,coord.latAddress], 'EPSG:4326', 'EPSG:3857');       
         const circle = new Circle(
             center,
-            20
+            this.state.radius
         );
         
         const circleFeature = new Feature(circle);  
