@@ -6,16 +6,20 @@ import{
 
 } from '../../constants/action_types';
   
-  const initialState = {
-      infoAddress: {},
-      selectedInfo: {},
-      mainChart: {},
-      tableHome: {},
-      dataTop: {},
-      loading: false,
-      loaded: false,
-      error: null
-    }
+const initialState = {
+    infoAddress: {},
+    selectedInfo: {
+        coordAddress: {}, 
+        pointAddress: {}, 
+        selectedDay: 0
+    },
+    mainChart: {},
+    tableHome: {},
+    dataTop: {},
+    loading: false,
+    loaded: false,
+    error: null
+}
     
     export default (state = initialState, action) => {
         const payload = action.payload
