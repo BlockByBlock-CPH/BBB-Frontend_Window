@@ -14,7 +14,7 @@ import { styles } from './styles';
 
 const MainContent = (props) => {
 
-    const { classes, searched, setInitMap, selectedInfo, initialMap, dataMC } = props;
+    const { classes, searched, setInitMap, coordAddress, initialMap, dataMC } = props;
 
     return(
         <Grid container>
@@ -24,7 +24,7 @@ const MainContent = (props) => {
                     <Paper className={classes.PaperMap} style={{ height: '40vh'}}>    
                         <Map 
                             setInitMap={setInitMap}
-                            selectedInfo={selectedInfo}
+                            coordAddress={coordAddress}
                             initialMap={initialMap}
                         />
                     </Paper>
@@ -39,7 +39,7 @@ const MainContent = (props) => {
                     <Paper className={classes.Paper} style={{ height: '100vh'}}>    
                         <Map 
                             setInitMap={setInitMap}
-                            selectedInfo={selectedInfo}
+                            coordAddress={coordAddress}
                             initialMap={initialMap}
                         />
                     </Paper>
@@ -53,7 +53,7 @@ MainContent.propTypes = {
     classes: PropTypes.object.isRequired,
     searched: PropTypes.bool.isRequired,
     setInitMap: PropTypes.func.isRequired,
-    selectedInfo: PropTypes.object.isRequired,
+    coordAddress: PropTypes.object.isRequired,
     initialMap: PropTypes.object.isRequired,
     dataMC: PropTypes.object.isRequired
 
