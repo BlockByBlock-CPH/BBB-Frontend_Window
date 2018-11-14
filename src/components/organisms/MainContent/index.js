@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Paper } from '@material-ui/core';
+import classNames from 'classnames';
+import { Grid, Paper, SnackbarContent } from '@material-ui/core';
+import InfoIcon from '@material-ui/icons/Info';
+
 
 //Components
 import Map from '../../molecules/Map';
@@ -14,24 +17,36 @@ import { styles } from './styles';
 
 const MainContent = (props) => {
 
-    const { classes, searched, setInitMap, coordAddress, initialMap, dataMC } = props;
-
+    const { classes, selectedAddress, setInitMap, coordAddress, initialMap, dataMC, polygonZone, totalDataMC } = props;
+    
     return(
         <Grid container>
         {
-            searched === true ? 
+            selectedAddress === true ? 
                 <Grid item sm={12}>
                     <Paper className={classes.PaperMap} style={{ height: '40vh'}}>    
                         <Map 
                             setInitMap={setInitMap}
                             coordAddress={coordAddress}
                             initialMap={initialMap}
+                            //polygonZone={polygonZone}
                         />
                     </Paper>
                     <Paper className={classes.PaperChart} style={{ height: '40vh'}}>
                     {    
-                        Object.keys(dataMC).length ? <BarChart dataMC={dataMC} /> : <Spinner /> 
-                    }                       
+                        totalDataMC > 0 ?
+                        (Object.keys(dataMC).length ? <BarChart dataMC={dataMC} /> : <Spinner />) :
+                        <SnackbarContent
+                            className={classes.info}
+                            aria-describedby="client-snackbar"
+                            message={
+                                <span id="client-snackbar" className={classes.message}>
+                                <InfoIcon className={classNames(classes.icon, classes.iconVariant)} />
+                                There are not any information about this address!
+                                </span>
+                            }
+                        />
+                    }                        
                     </Paper>
                 </Grid> 
                 : 
@@ -51,7 +66,7 @@ const MainContent = (props) => {
 
 MainContent.propTypes = {
     classes: PropTypes.object.isRequired,
-    searched: PropTypes.bool.isRequired,
+    selectedAddress: PropTypes.bool.isRequired,
     setInitMap: PropTypes.func.isRequired,
     coordAddress: PropTypes.object.isRequired,
     initialMap: PropTypes.object.isRequired,

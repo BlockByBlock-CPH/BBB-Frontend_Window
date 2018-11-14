@@ -1,20 +1,18 @@
 import{ 
-    GET_ADDRESS_REQUEST, GET_ADDRESS_SUCCESS, GET_ADDRESS_FAILURE, SELECTED_INFO,
-    GET_MAIN_CHART_REQUEST, GET_MAIN_CHART_SUCCESS, GET_MAIN_CHART_FAILURE,
+    SELECTED_INFO, GET_MAIN_CHART_REQUEST, GET_MAIN_CHART_SUCCESS, GET_MAIN_CHART_FAILURE,
     GET_TABLE_HOME_REQUEST,GET_TABLE_HOME_SUCCESS, GET_TABLE_HOME_FAILURE,
     GET_TOP_REQUEST, GET_TOP_SUCCESS, GET_TOP_FAILURE
 
 } from '../../constants/action_types';
   
 const initialState = {
-    infoAddress: {},
     selectedInfo: {
         coordAddress: {}, 
         pointAddress: {}, 
         selectedDay: 0
     },
     mainChart: {},
-    tableHome: {},
+    tableHome: [],
     dataTop: {},
     loading: false,
     loaded: false,
@@ -25,47 +23,6 @@ const initialState = {
         const payload = action.payload
 
         switch (action.type) {
-            case GET_ADDRESS_REQUEST:    
-                return {
-                    ...state,
-                    loading: true,
-                    loaded: false
-                }
-    
-            case GET_ADDRESS_SUCCESS:
-                return {
-                    ...state,
-                    infoAddress: payload.data.features.map(res => {
-                        return {
-                            lon:res.geometry.coordinates[0],
-                            lat:res.geometry.coordinates[1],
-                            address:{
-                                name:res.properties.name,
-                                street: res.properties.street,
-                                housenumber: res.properties.housenumber,
-                                postcode:res.properties.postcode,
-                                city:res.properties.city,
-                                state:res.properties.state,
-                                country:res.properties.country
-                            },
-                            original:{
-                                formatted:res.properties.name,
-                                details:res.properties
-                            }
-                        }
-                    }),
-                    loading: false,
-                    loaded: true,
-                    error: null
-                }   
-    
-            case GET_ADDRESS_FAILURE:
-                return {
-                    ...state,
-                    loading: false,
-                    loaded: true,
-                    error: payload
-                }
 
             case SELECTED_INFO:
                 return {

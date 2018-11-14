@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { Map, View, Feature } from 'ol';
 import TileLayer from 'ol/layer/Tile';
-import { OSM } from 'ol/source';
+import { XYZ } from 'ol/source';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import { Circle } from 'ol/geom';
+import { Circle, Polygon } from 'ol/geom';
 import { Style, Fill, Stroke } from 'ol/style';
-import {  defaults as defaultControls, ZoomSlider, FullScreen } from 'ol/control';
+import {  defaults as defaultControls, ZoomSlider, FullScreen, Attribution } from 'ol/control';
 import { defaults as defaultInteractions } from 'ol/interaction';
 import { transform } from 'ol/proj';
+import * as turf from '@turf/turf';
+
+import { access_token } from './token_map';
 
 //Styles
 import './styles.css';
@@ -20,10 +23,9 @@ class MapBBB extends Component {
             centerLong: 11.576124,
             centerLat: 48.137154,
             centerPoint: [],
-            zoom:8,
+            zoom: 8,
             maxZoom: 20,
             minZoom: 2,
-            radius: 20
         }
         this.createMap = this.createMap.bind(this);
         this.createCenterPoint = this.createCenterPoint.bind(this);
@@ -32,6 +34,10 @@ class MapBBB extends Component {
         this.paintLayer = this.paintLayer.bind(this);
         this.centerAddress = this.centerAddress.bind(this);
         this.removeOldAddress = this.removeOldAddress.bind(this);
+        this.makePolygonFromCoordinates = this.makePolygonFromCoordinates.bind(this);
+        this.getCenterOfExtent = this.getCenterOfExtent.bind(this);
+        this.makePolygonFromCentroid = this.makePolygonFromCentroid.bind(this);
+        this.updateSizeMap = this.updateSizeMap.bind(this);
     }
 
     shouldComponentUpdate() {
@@ -51,11 +57,14 @@ class MapBBB extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        //Typical usage (don't forget to compare props):
         if(this.props.coordAddress !== prevProps.coordAddress) {
             this.createCircleLayer(this.props.coordAddress);
-            // console.log("Selected_info map: ", this.props.selectedInfo);
+            this.makePolygonFromCentroid(this.props.coordAddress);
         }
+        //TODO: AGREGAR ESTO CUANDO LLEGUE EL GEOM(polygon) DESDE EL BACKEND
+        // else if(this.props.polygonZone !== prevProps.polygonZone){
+        //     this.makePolygonFromCentroid(this.props.polygonZone);
+        // }
     }
 
     createCenterPoint = () => {
@@ -70,62 +79,82 @@ class MapBBB extends Component {
             center: this.state.centerPoint,
             zoom: this.state.zoom,
             maxZoom: this.state.maxZoom,
-            minZoom: this.state.minZoom
+            minZoom: this.state.minZoom,
+            projection: 'EPSG:3857'
         });
 
+        const source = new XYZ({
+            url: `https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=${access_token}`
+        });
+          
+          
         const baseLayer = new TileLayer({
-            title: 'OSM',
-            type: 'base',
-            visible: true,
-            source: new OSM()
+            source: source
         });
 
         const map = new Map({
             target: this.refs.mapContainer,
             controls: defaultControls().extend([
                 new ZoomSlider(),
-                new FullScreen()
+                new FullScreen(),
+                new Attribution()
             ]), 
             attributionOptions: {
                 collapsible: false
             },
             interactions: defaultInteractions({
-                mouseWheelZoom: false
+                mouseWheelZoom: true
             }),
             renderer: 'canvas',
             layers: [baseLayer],
-            view: view
+            view: view,
+            minResolution: "auto",
+            maxResolution: "auto"
         });
-
+        console.log("Init projection ",baseLayer.getSource().getProjection().getCode());
         this.props.setInitMap(map,view,baseLayer); 
     };
+
 
     //Create a new circle layer (vectorlayer)
     createCircleLayer = (coord) => {
         const center = transform([coord.longAddress,coord.latAddress], 'EPSG:4326', 'EPSG:3857');       
         const circle = new Circle(
             center,
-            this.state.radius
+            20
         );
         
         const circleFeature = new Feature(circle);  
+
+        const painted = this.paintLayer('rgba(180, 0, 0, 0.5)', 'rgba(180, 0, 0, 1)', 2);
+        circleFeature.setStyle(painted);  
+
         const vectorSource = new VectorSource({
-            projection: 'EPSG:4326',
             features: [circleFeature]
         });
 
         const vectorLayer = new VectorLayer({
             source: vectorSource
         });
+        console.log("point projection ",vectorLayer.getSource().getProjection());
+        
+        //this.props.initialMap.map.render();
+        
+        vectorLayer.setZIndex(parseInt(1000, 10));
+        //this.updateSizeMap();
+        //this.updateViewProjection(center);
         this.removeOldAddress();
-        this.pushLayer(vectorLayer);  
+        this.pushLayer(vectorLayer);
         this.centerAddress(center);
+        this.updateSizeMap();
+    }
+
+    updateSizeMap = () => {
+        this.props.initialMap.map.updateSize();
     }
 
     //Add new Layer to the map
-    pushLayer = (layer) => {       
-        const painted = this.paintLayer('rgba(180, 0, 0, 0.7)', 'rgba(180, 0, 0, 1)', 3);
-        layer.setStyle(painted);         
+    pushLayer = (layer) => {             
         this.props.initialMap.map.addLayer(layer);
     }
 
@@ -148,7 +177,7 @@ class MapBBB extends Component {
         const map = this.props.initialMap.map;
         const view =  map.getView();
         view.setCenter(coord);
-        view.setZoom(17);
+        view.setZoom(15);
     };
 
     //Remove old layers (Address)  
@@ -172,10 +201,62 @@ class MapBBB extends Component {
         }
     }
 
+    makePolygonFromCoordinates = (coordinates) => {
+        let polygon_feature = new Feature({});
+        const polygon_geom = new Polygon(coordinates);
+        polygon_feature.setGeometry(polygon_geom);
+        polygon_feature.getGeometry().transform('EPSG:4326', 'EPSG:3857');
+        return polygon_feature.getGeometry();
+    }
+
+    getCenterOfExtent = (polygon) => {
+        const bounds = polygon.getExtent(); 
+        const x_min  = bounds[0];
+        const x_max  = bounds[2];
+        const y_min  = bounds[1];
+        const y_max  = bounds[3];
+
+        const X = x_min + (x_max-x_min)/2;
+        const Y = y_min + (y_max-y_min)/2;
+        const center = [X, Y]; 
+
+        return center;
+    }
+
+    //TODO: ESPERAR POLYGONO DESDE EL BACKEND
+    makePolygonFromCentroid = (coordinates) => {
+        // const initialPolygon = this.makePolygonFromCoordinates(coordinates);
+        // const centerPolygon = this.getCenterOfExtent(initialPolygon);
+        const centerPolygon = [coordinates.longAddress,coordinates.latAddress];
+        //const center = transform(centerPolygon, 'EPSG:3857', 'EPSG:4326');        
+        const radius = 0.353;
+        const options = {steps: 64, units: 'kilometers', properties: {zone: 'zone'}};
+        const circle = turf.circle(centerPolygon, radius, options);
+        let polygon = new Polygon([circle.geometry.coordinates[0]]);
+        polygon.transform('EPSG:4326', 'EPSG:3857');
+    
+        // Create feature with polygon.
+        var feature = new Feature(polygon);
+
+        const painted = this.paintLayer('rgba(178, 235, 249, 0.5)', 'rgba(20, 134, 163, 1)', 2);
+        feature.setStyle(painted);
+    
+        // Create vector source and the feature to it.
+        var vectorSource = new VectorSource();
+        vectorSource.addFeature(feature);
+    
+        // Create vector layer attached to the vector source.
+        var vectorLayer = new VectorLayer({
+            source: vectorSource
+        });
+                
+        this.pushLayer(vectorLayer);
+    }
+
 
     render() {
         return (
-            <div id="mapContainer" ref="mapContainer"> </div>
+            <div id="map" className="map" ref="mapContainer"> </div>
         );
     }
 }

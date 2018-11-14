@@ -11,7 +11,8 @@ import DrawerHeaderLeft from '../../molecules/DrawerHeaderLeft';
 import { styles } from './styles';
 
 const DrawerLeft = (props) => {
-    const { classes, anchor, open, handleDrawerClose, searchAddress } = props;
+    const { classes, anchor, open, handleDrawerClose, searchAddress, handleChange, 
+            searchedAddress, suggestions, listActive, selectAddress, selectedDay, handleChangeSelecteDay } = props;
     return (
         <Drawer
             variant="persistent"
@@ -25,7 +26,16 @@ const DrawerLeft = (props) => {
 
             <Divider />
 
-            <FormSearch searchAddress={searchAddress}/> 
+            <FormSearch 
+                searchAddress={searchAddress} 
+                handleChange={handleChange} 
+                searchedAddress={searchedAddress}
+                suggestions={suggestions}
+                listActive={listActive}
+                selectAddress={selectAddress}
+                selectedDay={selectedDay}
+                handleChangeSelecteDay={handleChangeSelecteDay}
+            /> 
         </Drawer>
     )
 }

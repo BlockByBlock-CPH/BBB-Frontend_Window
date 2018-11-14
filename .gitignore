@@ -23,3 +23,9 @@ yarn-error.log*
 
 #API
 /src/constants/apis.js
+
+#TOKEN MAP
+/src/components/molecules/Map/token_map.js
+
+.gitignore
+package-lock.json
