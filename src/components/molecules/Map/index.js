@@ -4,8 +4,8 @@ import TileLayer from 'ol/layer/Tile';
 import { XYZ } from 'ol/source';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import { Circle, Polygon } from 'ol/geom';
-import { Style, Fill, Stroke } from 'ol/style';
+import { Circle, Polygon, Point } from 'ol/geom';
+import { Style, Fill, Stroke, Icon } from 'ol/style';
 import {  defaults as defaultControls, ZoomSlider, FullScreen, Attribution } from 'ol/control';
 import { defaults as defaultInteractions } from 'ol/interaction';
 import { transform } from 'ol/proj';
@@ -15,6 +15,7 @@ import { access_token } from './token_map';
 
 //Styles
 import './styles.css';
+import marker from '../../../assets/marker.png';
 
 class MapBBB extends Component {
     constructor(props){
@@ -38,6 +39,7 @@ class MapBBB extends Component {
         this.getCenterOfExtent = this.getCenterOfExtent.bind(this);
         this.makePolygonFromCentroid = this.makePolygonFromCentroid.bind(this);
         this.updateSizeMap = this.updateSizeMap.bind(this);
+        this.setMarkerIntoMap = this.setMarkerIntoMap.bind(this);
     }
 
     shouldComponentUpdate() {
@@ -59,6 +61,7 @@ class MapBBB extends Component {
     componentDidUpdate(prevProps) {
         if(this.props.coordAddress !== prevProps.coordAddress) {
             this.createCircleLayer(this.props.coordAddress);
+            this.setMarkerIntoMap(this.props.coordAddress);
             this.makePolygonFromCentroid(this.props.coordAddress);
         }
         //TODO: AGREGAR ESTO CUANDO LLEGUE EL GEOM(polygon) DESDE EL BACKEND
@@ -111,14 +114,13 @@ class MapBBB extends Component {
             minResolution: "auto",
             maxResolution: "auto"
         });
-        console.log("Init projection ",baseLayer.getSource().getProjection().getCode());
+        
         this.props.setInitMap(map,view,baseLayer); 
     };
 
-
     //Create a new circle layer (vectorlayer)
-    createCircleLayer = (coord) => {
-        const center = transform([coord.longAddress,coord.latAddress], 'EPSG:4326', 'EPSG:3857');       
+    createCircleLayer = (coordinates) => {
+        const center = transform([coordinates.longAddress,coordinates.latAddress], 'EPSG:4326', 'EPSG:3857');       
         const circle = new Circle(
             center,
             20
@@ -136,17 +138,44 @@ class MapBBB extends Component {
         const vectorLayer = new VectorLayer({
             source: vectorSource
         });
-        console.log("point projection ",vectorLayer.getSource().getProjection());
-        
-        //this.props.initialMap.map.render();
-        
+                
         vectorLayer.setZIndex(parseInt(1000, 10));
-        //this.updateSizeMap();
-        //this.updateViewProjection(center);
         this.removeOldAddress();
         this.pushLayer(vectorLayer);
+        this.setMarkerIntoMap(center);
         this.centerAddress(center);
         this.updateSizeMap();
+    }    
+
+    setMarkerIntoMap = (coordinates) => {
+        const iconFeature = new Feature({
+            geometry: new Point(coordinates),
+            name: 'Null Island',
+            population: 4000,
+            rainfall: 500
+        });
+    
+        const iconStyle = new Style({
+            image: new Icon(/** @type {module:ol/style/Icon~Options} */ ({
+                anchor: [0.5, 50],
+                anchorXUnits: 'fraction',
+                anchorYUnits: 'pixels',
+                src: [marker]
+            }))
+        });
+    
+        iconFeature.setStyle(iconStyle);
+    
+        const vectorSource = new VectorSource({
+            features: [iconFeature]
+        });
+    
+        const vectorLayer = new VectorLayer({
+            source: vectorSource
+        });
+
+        vectorLayer.setZIndex(parseInt(1000, 10));
+        this.pushLayer(vectorLayer);
     }
 
     updateSizeMap = () => {
