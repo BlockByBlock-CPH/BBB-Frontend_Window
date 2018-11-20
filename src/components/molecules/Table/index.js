@@ -14,13 +14,13 @@ const TableBBB = (props) => {
 
     const { classes, dataTH } = props;
     return (
-        <Table className={classes.Table}>
+        <Table className={classes.table}>
             <TableHead>
                 <TableRow>
                 {
                     dataTH.th.map(title => {
                         return(
-                            <TableCell key={title} className={classes.TableCell}>
+                            <TableCell key={title} className={classes.tableHead}>
                                 {title}
                             </TableCell>
                         );
@@ -33,16 +33,16 @@ const TableBBB = (props) => {
                 dataTH.td.map(row => {
                     return (
                         <TableRow key={row.id}>
-                            <TableCell className={classes.TableCell} component="th" scope="row">
+                            <TableCell className={classes.tableCell} component="th" scope="row">
                             { 
                                 row.id === 1 ? <div><ArrowUpward /><PermIdentity /></div> : <div><ArrowDownward /><PermIdentity /></div>
                             }
                             </TableCell>
-                            <TableCell className={classes.TableCell} numeric>{row.day}</TableCell>
+                            <TableCell className={classes.tableCell} numeric>{row.day}</TableCell>
                             {
-                                row.hour ? <TableCell className={classes.TableCell} numeric>{row.hour}</TableCell> : null
+                                row.hour ? <TableCell className={classes.tableCell} numeric>{row.hour}</TableCell> : null
                             }
-                            <TableCell className={classes.TableCell} numeric>{row.people}</TableCell>
+                            <TableCell className={classes.tableCell} numeric>{row.people}</TableCell>
                         </TableRow>
                     );
                 })

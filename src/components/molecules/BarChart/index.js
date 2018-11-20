@@ -12,10 +12,10 @@ const BarChart = (props) => {
         return (   
             {
                 label: ''+index+'',
-                backgroundColor: 'rgba(0,139,139,0.3)',
+                backgroundColor: 'rgba(0,139,139,1)',
                 borderColor: 'rgba(0,139,139,1)',
                 borderWidth: 1,
-                hoverBackgroundColor: 'rgba(0,139,139,0.7)',
+                hoverBackgroundColor: 'rgba(0,139,139,1)',
                 hoverBorderColor: 'rgba(0,139,139,1)',
                 data: Object.values(serie).map(s => {return(s)})
             }
@@ -76,12 +76,20 @@ const BarChart = (props) => {
                     // Include a dollar sign in the ticks
                     callback: function(value, index, values) {
                         return '' + value;
-                    }
+                    },
+                    fontColor: '#BDBDBD'
+                },
+                gridLines: {
+                    color: '#292929',
                 }
             }],
             xAxes: [{
                 ticks: {
-                    fontSize: 10
+                    fontSize: 10,
+                    fontColor: '#BDBDBD'
+                },
+                gridLines: {
+                    color: '#292929',
                 }
             }]
         },
@@ -93,7 +101,9 @@ const BarChart = (props) => {
         },
         title: {
             display: true,
-            text: title
+            text: title,
+            fontColor: '#BDBDBD',
+            fontSize: 12
         },
         animation: {
             duration: 1500,

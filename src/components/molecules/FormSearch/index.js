@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Button, TextField, MenuItem } from '@material-ui/core';
+import { Button, TextField, MenuItem, Typography } from '@material-ui/core';
 import  { Search } from '@material-ui/icons';
 
 import Autocomplete from '../../molecules/Autocomplete';
@@ -13,21 +13,22 @@ const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, sug
     selectAddress, selectedDay, handleChangeSelecteDay }) => {    
    
     return (
-        <form className={classes.Form} noValidate autoComplete="off" onSubmit={searchAddress}>
+        <form onSubmit={searchAddress} noValidate autoComplete="off">
             <TextField 
+                required
                 type="search" 
-                label="Search Address"
+                placeholder="SEARCH ADDRESS"
                 margin="normal"
                 fullWidth={true} 
                 id="searchAddress"   
                 onChange={handleChange}
-                value={searchedAddress}          
+                value={searchedAddress}  
+                InputProps={{ classes: { underline: classes.textField } }} 
             />
             {
                 listActive === false ? null : <Autocomplete suggestions={suggestions} selectAddress={selectAddress}/>
             }
-            <TextField 
-                className={classes.Select}
+            <TextField
                 select 
                 value={selectedDay}
                 onChange={handleChangeSelecteDay}
@@ -36,6 +37,7 @@ const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, sug
                 margin="normal"
                 fullWidth={true}
                 id="selectDay"
+                InputProps={{ classes: { underline: classes.textField } }} 
             >
             {
                 listDays.map(option => (
@@ -45,15 +47,20 @@ const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, sug
                 ))
             }
             </TextField>
-            <Button 
-                className={classes.Button}
-                variant="contained" 
-                color="primary" 
-                type="submit"
-                id="btnSearch"
-            >
-                <Search />
-            </Button>
+            <div className={classes.buttonContainer}>
+                <Button
+                className={classes.button}
+                    variant="contained" 
+                    color="primary" 
+                    type="submit"
+                    id="btnSearch"
+                >
+                    <Search /> 
+                    <Typography align="center" variant="subtitle1" id="modal-title">
+                    Search
+                    </Typography>
+                </Button>
+            </div>
             
         </form>
     )

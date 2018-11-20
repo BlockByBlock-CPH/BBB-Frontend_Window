@@ -139,7 +139,7 @@ class HomeContainer extends Component {
         if(this.props.selectedDay > 0){    
             this.setState({ dataMC: dataMC });
         }else if(this.props.selectedDay === 0){
-            dataMC.title = { "0": "Week" };
+            dataMC.title = { "0": "DAYS OF THE WEEK" };
             this.setState({ dataMC: dataMC });
         }        
     }
@@ -151,9 +151,9 @@ class HomeContainer extends Component {
         dataTH = {td};
 
         if(this.props.selectedDay > 0){
-            dataTH.th = ["","Day","Hour","# People"];
+            dataTH.th = ["","DAY","HOUR","PEOPLE"];
         }else if(this.props.selectedDay === 0){
-            dataTH.th = ["","Day","# People"];        
+            dataTH.th = ["","DAY","PEOPLE"];        
         };        
         this.setState({ dataTH: dataTH });
     }
@@ -161,8 +161,8 @@ class HomeContainer extends Component {
     dataTop = (data) => {      
         let dataChartTop1 = Object.assign({}, data.chart1);
         let dataChartTop2 = Object.assign({}, data.chart2);
-        dataChartTop1.title = { "0": "Top Max People by Zone"};
-        dataChartTop2.title = { "0": "Top Min People by Zone"};
+        dataChartTop1.title = { "0": "TOP MAX PEOPLE BY ZONE"};
+        dataChartTop2.title = { "0": "TOP MIN PEOPLE BY ZONE"};
         this.setState({ dataTC: { dataChartTop1, dataChartTop2 }});
     }
 

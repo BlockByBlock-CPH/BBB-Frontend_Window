@@ -24,7 +24,7 @@ const ModalTop = (props) => {
             className={classes.Modal}
         >
             <div className={classes.PaperModal}>
-                <Typography align="center" variant="h5" id="modal-title">
+                <Typography align="center" variant="h4" id="modal-title">
                     Top 5
                 </Typography>
                 <Paper className={classes.Paper}>

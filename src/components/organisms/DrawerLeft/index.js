@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Drawer, Divider } from '@material-ui/core';
+import { Drawer, Divider, Paper } from '@material-ui/core';
 
 //Components
 import FormSearch from '../../molecules/FormSearch';
@@ -25,17 +25,18 @@ const DrawerLeft = (props) => {
             <DrawerHeaderLeft handleDrawerClose={handleDrawerClose} />
 
             <Divider />
-
-            <FormSearch 
-                searchAddress={searchAddress} 
-                handleChange={handleChange} 
-                searchedAddress={searchedAddress}
-                suggestions={suggestions}
-                listActive={listActive}
-                selectAddress={selectAddress}
-                selectedDay={selectedDay}
-                handleChangeSelecteDay={handleChangeSelecteDay}
-            /> 
+            <Paper className={classes.paperForm}>
+                <FormSearch 
+                    searchAddress={searchAddress} 
+                    handleChange={handleChange} 
+                    searchedAddress={searchedAddress}
+                    suggestions={suggestions}
+                    listActive={listActive}
+                    selectAddress={selectAddress}
+                    selectedDay={selectedDay}
+                    handleChangeSelecteDay={handleChangeSelecteDay}
+                /> 
+            </Paper>
         </Drawer>
     )
 }

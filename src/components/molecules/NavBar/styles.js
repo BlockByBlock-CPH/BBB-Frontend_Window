@@ -7,7 +7,7 @@ export const styles = (theme) => ({
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
         }),
-        backgroundColor: '#000000'
+        backgroundColor: theme.drawerHeader.backgroundColor   
     },
     appBarShift: {
         width: `calc(100% - ${drawerWidth}px)`,
@@ -25,8 +25,5 @@ export const styles = (theme) => ({
     },
     hide: {
         display: 'none',
-    },
-    Typography: {
-        color: '#FFFFFF'
     }
 });

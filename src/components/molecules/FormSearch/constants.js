@@ -1,7 +1,7 @@
 export const listDays = [
     {
       value: 0,
-      label: 'Select day'
+      label: 'SELECT DAY'
     },
     {
       value: 1,

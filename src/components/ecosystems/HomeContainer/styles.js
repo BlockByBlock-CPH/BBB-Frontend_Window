@@ -1,8 +1,17 @@
+import { grey } from '@material-ui/core/colors';
+
 const drawerWidth = 300;
 
 export const styles = (theme) => ({
+  '@global': {
+    'html, body, #root': {
+        height: '100%'
+    }
+  },
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundColor: grey[800],
+    height: '100%'
   },
   appFrame: {
     height: '100%',
@@ -25,7 +34,7 @@ export const styles = (theme) => ({
   },
   contentChanged: {
     flexGrow: 1,
-    // backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.mainContent.backgroundColor,
     padding: theme.spacing.unit * 3,
     // padding: 10,
     transition: theme.transitions.create('margin', {
@@ -49,6 +58,7 @@ export const styles = (theme) => ({
     height: '100vh',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderRadius: 0
   }
 });

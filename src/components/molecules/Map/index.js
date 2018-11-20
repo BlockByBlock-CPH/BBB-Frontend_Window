@@ -141,7 +141,7 @@ class MapBBB extends Component {
                 
         vectorLayer.setZIndex(parseInt(1000, 10));
         this.removeOldAddress();
-        this.pushLayer(vectorLayer);
+        //this.pushLayer(vectorLayer);
         this.setMarkerIntoMap(center);
         this.centerAddress(center);
         this.updateSizeMap();

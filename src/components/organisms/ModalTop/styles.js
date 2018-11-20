@@ -30,8 +30,11 @@ export const styles = (theme) => ({
     PaperModal: {
         position: 'absolute',
         width: '40%',
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: theme.modalContainer.backgroundColor,
         boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit * 4
+        padding: theme.spacing.unit * 4,
+        '&:focus':{
+            border: '2px solid #008b8b'
+        }
     }
 });

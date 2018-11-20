@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Paper, Button } from '@material-ui/core';
+import { Grid, Paper, Button, Typography } from '@material-ui/core';
 
 //Components
 import ModalTop from '../ModalTop';
@@ -46,7 +46,11 @@ class RightContent extends Component {
                     color="primary" 
                     type="button"
                     onClick={this.handleOpen}
-                >See more</Button>
+                >
+                    <Typography align="center" variant="subtitle1" id="modal-title">
+                        See More
+                    </Typography>
+                </Button>
             </Paper>
 
             <ModalTop 
