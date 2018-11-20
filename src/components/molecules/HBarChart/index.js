@@ -13,7 +13,7 @@ const HorizontalBarChart = (props) => {
         return (   
             {
                 label: ''+index+'',
-                backgroundColor: 'rgba(0,139,139,1)',
+                backgroundColor: 'rgba(0,139,139,0.8)',
                 borderColor: 'rgba(0,139,139,1)',
                 borderWidth: 1,
                 hoverBackgroundColor: 'rgba(0,139,139,1)',
@@ -42,6 +42,7 @@ const HorizontalBarChart = (props) => {
                 },
                 gridLines: {
                     color: '#292929',
+                    display: true
                 }
             }],
             xAxes: [{
@@ -51,6 +52,7 @@ const HorizontalBarChart = (props) => {
                 },
                 gridLines: {
                     color: '#292929',
+                    display: true
                 }
             }]
         },

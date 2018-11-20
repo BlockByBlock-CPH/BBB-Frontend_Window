@@ -20,11 +20,11 @@ const MainContent = (props) => {
     const { classes, selectedAddress, setInitMap, coordAddress, initialMap, dataMC, polygonZone, totalDataMC } = props;
     
     return(
-        <Grid container>
+        <Grid className={classes.gridContainer} container>
         {
             selectedAddress === true ? 
                 <Grid item sm={12}>
-                    <Paper className={classes.paper} style={{ height: '40vh'}}>    
+                    <Paper className={classes.paper}>    
                         <Map 
                             setInitMap={setInitMap}
                             coordAddress={coordAddress}
@@ -33,7 +33,7 @@ const MainContent = (props) => {
                         />
                     </Paper>
                     <div className={classes.separate} />
-                    <Paper className={classes.paper} style={{ height: '40vh'}}>
+                    <Paper className={classes.paper}>
                     {    
                         totalDataMC > 0 ?
                         (Object.keys(dataMC).length ? <BarChart dataMC={dataMC} /> : <Spinner />) :
@@ -52,7 +52,7 @@ const MainContent = (props) => {
                 </Grid> 
                 : 
                 <Grid item sm={12}>
-                    <Paper style={{ height: '100vh'}}>    
+                    <Paper style={{ height: '100vh', margin: '-10px'}}>    
                         <Map 
                             setInitMap={setInitMap}
                             coordAddress={coordAddress}

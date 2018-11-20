@@ -30,12 +30,13 @@ export const styles = (theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: 0
+    padding: 0,
+    height: '100%'
   },
   contentChanged: {
     flexGrow: 1,
     backgroundColor: theme.mainContent.backgroundColor,
-    padding: theme.spacing.unit * 3,
+    //padding: theme.spacing.unit * 3,
     // padding: 10,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,

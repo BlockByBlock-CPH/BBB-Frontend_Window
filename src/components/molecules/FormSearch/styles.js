@@ -1,10 +1,11 @@
-export const styles = (theme) => ({
+export const styles = () => ({
   buttonContainer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
   },
   button: {
+    width: '100%',
     '&:hover': {
       // background: '#BDBDBD',
       // color: '#008b8b'
@@ -12,7 +13,8 @@ export const styles = (theme) => ({
   },
   textField: {
     '&:hover': {
-      borderBottom: '1px solid #008b8b'
+      borderBottom: '1px solid #008b8b',
+      color: '#008b8b'
     },
     '&:before': {
       borderBottom: 'none'
@@ -20,5 +22,13 @@ export const styles = (theme) => ({
     '&:after': {
         borderBottom: '1px solid #008b8b'
     }
+  },
+  menuItem: {
+    '&:hover': {
+      color: '#008b8b'
+    }
+  },
+  iconSearch: {
+    cursor: 'pointer'
   }
 });

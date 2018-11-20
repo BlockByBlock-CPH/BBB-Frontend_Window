@@ -16,8 +16,10 @@ export const styles = theme => ({
     suggestion: {
       display: 'block',
       boxShadow: '0 0 0 0 rgba(0, 0, 0, 0.2), 0 1px 0 0 rgba(0, 0, 0, 0.1)',
-      borderRadius: 0
-      // border: '2px solid red',
+      borderRadius: 0,
+      '&:hover': {
+        color: '#008b8b'
+      }
     },
     suggestionsList: {
         margin: 0,

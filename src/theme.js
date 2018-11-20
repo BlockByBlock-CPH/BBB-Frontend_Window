@@ -48,7 +48,7 @@ export const theme = createMuiTheme({
           color: grey[200]
         },
         button: {
-          fontStyle: 'italic',
+          
         },
     },
     overrides: {
@@ -93,12 +93,14 @@ export const theme = createMuiTheme({
         },
         MuiFormControl: {
             root: {
-                flexDirection: 'initial'
+                flexDirection: 'initial',
+                marginTop: '0 !important',
+                marginBottom: '10px !important'
             }
         },
         MuiSvgIcon: {
             root: {
-                color: grey[400]
+                color: '#008b8b !important'
             }
         }
     }

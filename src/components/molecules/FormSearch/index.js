@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Button, TextField, MenuItem, Typography } from '@material-ui/core';
+import { Button, TextField, MenuItem, Typography, InputAdornment, Icon } from '@material-ui/core';
 import  { Search } from '@material-ui/icons';
 
 import Autocomplete from '../../molecules/Autocomplete';
@@ -9,9 +9,15 @@ import Autocomplete from '../../molecules/Autocomplete';
 import { styles } from './styles';
 import { listDays } from './constants';
 
+const computingAdornment = (
+    <InputAdornment position={'end'}>
+        <Icon><Search /></Icon>
+    </InputAdornment>
+);
+
 const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, suggestions, listActive, 
     selectAddress, selectedDay, handleChangeSelecteDay }) => {    
-   
+
     return (
         <form onSubmit={searchAddress} noValidate autoComplete="off">
             <TextField 
@@ -23,7 +29,15 @@ const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, sug
                 id="searchAddress"   
                 onChange={handleChange}
                 value={searchedAddress}  
-                InputProps={{ classes: { underline: classes.textField } }} 
+                InputProps={{ 
+                    classes: { underline: classes.textField }, 
+                    endAdornment:( 
+                        <InputAdornment position={'end'}>
+                            <Icon>
+                                <Search className={classes.iconSearch} onClick={searchAddress}/></Icon>
+                        </InputAdornment>
+                    )
+                }} 
             />
             {
                 listActive === false ? null : <Autocomplete suggestions={suggestions} selectAddress={selectAddress}/>
@@ -41,7 +55,7 @@ const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, sug
             >
             {
                 listDays.map(option => (
-                    <MenuItem key={option.value} value={option.value}>
+                    <MenuItem key={option.value} value={option.value} className={classes.menuItem}>
                         {option.label}
                     </MenuItem>
                 ))
@@ -49,7 +63,7 @@ const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, sug
             </TextField>
             <div className={classes.buttonContainer}>
                 <Button
-                className={classes.button}
+                    className={classes.button}
                     variant="contained" 
                     color="primary" 
                     type="submit"
