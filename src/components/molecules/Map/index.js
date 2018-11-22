@@ -267,7 +267,7 @@ class MapBBB extends Component {
         // Create feature with polygon.
         var feature = new Feature(polygon);
 
-        const painted = this.paintLayer('rgba(178, 235, 249, 0.5)', 'rgba(20, 134, 163, 1)', 2);
+        const painted = this.paintLayer('rgba(0, 229, 255, 0.2)', 'rgba(0, 229, 255, 0.8)', 1);
         feature.setStyle(painted);
     
         // Create vector source and the feature to it.

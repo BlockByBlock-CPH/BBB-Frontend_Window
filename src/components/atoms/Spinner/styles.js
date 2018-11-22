@@ -1,8 +1,7 @@
-import cyan from '@material-ui/core/colors/cyan';
+import { cyan } from '@material-ui/core/colors';
 
 export const styles = () => ({
   progress: {
-    color: cyan[300]
+    color: cyan.A400
   }
-  
 });

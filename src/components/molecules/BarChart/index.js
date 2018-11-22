@@ -12,11 +12,11 @@ const BarChart = (props) => {
         return (   
             {
                 label: ''+index+'',
-                backgroundColor: 'rgba(0,139,139,0.8)',
-                borderColor: 'rgba(0,139,139,1)',
+                backgroundColor: 'rgba(0, 229, 255,0.6)',
+                borderColor: 'rgba(0, 229, 255,1)',
                 borderWidth: 1,
-                hoverBackgroundColor: 'rgba(0,139,139,1)',
-                hoverBorderColor: 'rgba(0,139,139,1)',
+                hoverBackgroundColor: 'rgba(0, 229, 255,1)',
+                hoverBorderColor: 'rgba(0, 229, 255,1)',
                 data: Object.values(serie).map(s => {return(s)})
             }
         );

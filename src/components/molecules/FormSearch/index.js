@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Button, TextField, MenuItem, Typography, InputAdornment, Icon } from '@material-ui/core';
+import { Button, TextField, MenuItem, InputAdornment, Icon } from '@material-ui/core';
 import  { Search } from '@material-ui/icons';
 
 import Autocomplete from '../../molecules/Autocomplete';
@@ -9,11 +9,6 @@ import Autocomplete from '../../molecules/Autocomplete';
 import { styles } from './styles';
 import { listDays } from './constants';
 
-const computingAdornment = (
-    <InputAdornment position={'end'}>
-        <Icon><Search /></Icon>
-    </InputAdornment>
-);
 
 const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, suggestions, listActive, 
     selectAddress, selectedDay, handleChangeSelecteDay }) => {    
@@ -70,9 +65,7 @@ const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, sug
                     id="btnSearch"
                 >
                     <Search /> 
-                    <Typography align="center" variant="subtitle1" id="modal-title">
                     Search
-                    </Typography>
                 </Button>
             </div>
             

@@ -10,7 +10,7 @@ const Spinner = (props) => {
     const { classes } = props;
     
     return (
-        <CircularProgress className={classes.progress} thickness={10}/>
+        <CircularProgress className={classes.progress} thickness={5} size={props.size}/>
     );
 }
 

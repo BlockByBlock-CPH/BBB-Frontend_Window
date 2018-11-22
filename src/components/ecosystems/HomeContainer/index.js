@@ -228,7 +228,7 @@ class HomeContainer extends Component {
         if(loading === true){
             return (
                 <Paper className={classes.PaperSpinner}>
-                    <Spinner />
+                    <Spinner size={80} />
                 </Paper>
             );
         }

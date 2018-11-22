@@ -1,5 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { grey } from '@material-ui/core/colors';
+import { grey, cyan } from '@material-ui/core/colors';
+
+const boxShadow = '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)';
 
 export const theme = createMuiTheme({
     palette: {
@@ -44,7 +46,7 @@ export const theme = createMuiTheme({
             color: grey[200],
         },
         subtitle1: {
-          fontSize: 12,
+          fontSize: 16,
           color: grey[200]
         },
         button: {
@@ -56,14 +58,16 @@ export const theme = createMuiTheme({
         MuiButton: {
             // Name of the rule
             root: {
-                width: 200,
+                width: '100%',
                 height: 30,
-                background: 'linear-gradient(15deg, #21CBF3 10%, #008b8b 100%)',
+                background: 'linear-gradient(15deg,'+ cyan.A400 +' 10%,'+ cyan.A700 +' 100%)',
                 borderRadius: 4,
                 border: 0,
-                color: grey[400],
+                color: grey[200]+' !important',
                 padding: '0 20px',
-                boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)'
+                boxShadow: boxShadow,
+                fontSize: 14,
+                fontWeight: 800
             }
         },
         MuiPaper: {
@@ -76,7 +80,7 @@ export const theme = createMuiTheme({
                 color: grey[400],
                 backgroundColor: grey[900],
                 padding: '5px 15px',
-                boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
+                boxShadow: boxShadow,
                 borderRadius: 4,
                 fontSize: '0.8rem'
             }
@@ -87,7 +91,7 @@ export const theme = createMuiTheme({
                 backgroundColor: grey[800],
                 padding: 10,
                 borderBottom: '1px solid '+grey[900],
-                boxShadow: '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
+                boxShadow: boxShadow,
                 fontSize: '0.8rem'
             }
         },
@@ -100,7 +104,8 @@ export const theme = createMuiTheme({
         },
         MuiSvgIcon: {
             root: {
-                color: '#008b8b !important'
+                color: cyan.A400+' !important',
+                fontSize: 20
             }
         }
     }

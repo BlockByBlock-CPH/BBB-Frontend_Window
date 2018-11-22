@@ -36,9 +36,9 @@ const MainContent = (props) => {
                     <Paper className={classes.paper}>
                     {    
                         totalDataMC > 0 ?
-                        (Object.keys(dataMC).length ? <BarChart dataMC={dataMC} /> : <Spinner />) :
+                        (Object.keys(dataMC).length ? <BarChart dataMC={dataMC} /> : <Spinner size={40} />) :
                         <SnackbarContent
-                            className={classes.info}
+                            className={classes.infoMessage}
                             aria-describedby="client-snackbar"
                             message={
                                 <span id="client-snackbar" className={classes.message}>

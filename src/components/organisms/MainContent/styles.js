@@ -13,7 +13,7 @@ export const styles = (theme) => ({
     separate: {
         height: 10
     },
-    info: {
+    infoMessage: {
         backgroundColor: '#282828',
     },
     icon: {

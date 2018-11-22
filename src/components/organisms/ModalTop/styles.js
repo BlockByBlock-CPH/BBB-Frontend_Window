@@ -1,3 +1,5 @@
+import { cyan } from '@material-ui/core/colors';
+
 export const styles = (theme) => ({
     Paper: {
         padding: 5,
@@ -34,7 +36,7 @@ export const styles = (theme) => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
         '&:focus':{
-            border: '2px solid #008b8b'
+            border: '2px solid '+cyan.A400
         }
     }
 });

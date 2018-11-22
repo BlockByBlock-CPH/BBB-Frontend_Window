@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Paper, Button, Typography } from '@material-ui/core';
+import { Grid, Paper, Button } from '@material-ui/core';
 
 //Components
 import ModalTop from '../ModalTop';
@@ -36,7 +36,7 @@ class RightContent extends Component {
         <Grid item sm={12}>
             <Paper className={classes.Paper}>
             {
-                Object.keys(dataTH).length ? <TableBBB dataTH={dataTH} /> : <Spinner />
+                Object.keys(dataTH).length ? <TableBBB dataTH={dataTH} /> : <Spinner size={40} />
             }
             </Paper>
             <Paper className={classes.PaperButton}>
@@ -47,12 +47,10 @@ class RightContent extends Component {
                     type="button"
                     onClick={this.handleOpen}
                 >
-                    <Typography align="center" variant="subtitle1" id="modal-title">
-                        See More
-                    </Typography>
+                    See More
                 </Button>
             </Paper>
-
+            
             <ModalTop 
                 dataTC={dataTC}
                 handleClose={this.handleClose}

@@ -29,12 +29,12 @@ const ModalTop = (props) => {
                 </Typography>
                 <Paper className={classes.Paper}>
                 {
-                    Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop1} /> : <Spinner />
+                    Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop1} /> : <Spinner size={40} />
                 }
                 </Paper>
                 <Paper className={classes.Paper}>
                 {
-                    Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop2} /> : <Spinner />
+                    Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop2} /> : <Spinner size={40} />
                 }
                 </Paper>
                 <Paper className={classes.PaperButton}>
