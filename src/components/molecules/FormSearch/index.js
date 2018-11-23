@@ -58,7 +58,6 @@ const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, sug
             </TextField>
             <div className={classes.buttonContainer}>
                 <Button
-                    className={classes.button}
                     variant="contained" 
                     color="primary" 
                     type="submit"

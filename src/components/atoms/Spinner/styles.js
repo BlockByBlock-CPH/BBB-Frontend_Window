@@ -1,7 +1,5 @@
-import { cyan } from '@material-ui/core/colors';
-
-export const styles = () => ({
+export const styles = (theme) => ({
   progress: {
-    color: cyan.A400
+    color: theme.palette.primary.main
   }
 });

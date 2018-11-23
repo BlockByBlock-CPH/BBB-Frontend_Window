@@ -4,7 +4,7 @@ import './styles.css';
 
 const BarChart = (props) => {  
     const { dataMC } = props;
-    // const sizeObject = parseInt(Object.keys(dataMC).length,10);
+    
     let legend = false;
     let labels = Object.values(dataMC.labels).map(label => {return(label)});;
     let title = dataMC.title[0];
@@ -21,46 +21,6 @@ const BarChart = (props) => {
             }
         );
     });  
-
-    // if(sizeObject === 3){
-    //     dataset = Object.values(dataMC.series).map((serie, index) => {
-    //         return (   
-    //             {
-    //                 label: ''+index+'',
-    //                 backgroundColor: 'rgba(0,139,139,0.3)',
-    //                 borderColor: 'rgba(0,139,139,1)',
-    //                 borderWidth: 1,
-    //                 hoverBackgroundColor: 'rgba(0,139,139,0.7)',
-    //                 hoverBorderColor: 'rgba(0,139,139,1)',
-    //                 data: Object.values(serie).map(s => {return(s)})
-    //             }
-    //         );
-    //     });
-    //     labels = Object.values(dataMC.labels).map(label => {return(label)});
-    //     title = dataMC.title[0];
-    //     legend = false;
-    // } else {
-    //     dataset = [{
-    //             label: dataMC[0].title,
-    //             backgroundColor: 'rgba(0,139,139,0.3)',
-    //             borderColor: 'rgba(0,139,139,1)',
-    //             borderWidth: 1,
-    //             hoverBackgroundColor: 'rgba(0,139,139,0.7)',
-    //             hoverBorderColor: 'rgba(0,139,139,1)',
-    //             data: dataMC.map(d => {return( d.series)})
-    //         }];
-    //     labels = dataMC.map(d => {return(d.labels)});
-    //     title = dataMC[0].title;
-    //     legend = false;
-    // }
-
-    // let barColor = [];
-    // let i = 0;
-    
-    // for(i=0; i < sizeObject; i++){
-    //     barColor.push('rgba(0,139,139,0.3)');
-    // }
-
     
     const data = {
         labels: labels,
@@ -73,7 +33,6 @@ const BarChart = (props) => {
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
-                    // Include a dollar sign in the ticks
                     callback: function(value, index, values) {
                         return '' + value;
                     },

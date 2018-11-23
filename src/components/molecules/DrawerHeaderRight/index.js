@@ -11,7 +11,7 @@ const DrawerHeaderRight = (props) => {
     return (
 
         <div className={classes.drawerHeaderRight}>
-            <Typography className={classes.Typography} variant="subtitle1" noWrap>
+            <Typography variant="subtitle1" noWrap>
             {title}
             </Typography>
         </div>

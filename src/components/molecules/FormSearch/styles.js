@@ -4,12 +4,6 @@ export const styles = (theme) => ({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  button: {
-    '&:hover': {
-      // background: '#BDBDBD',
-      // color: '#008b8b'
-    }
-  },
   menuItem: {
     '&:hover': {
       fontSize: 16,
