@@ -1,15 +1,13 @@
-const drawerWidth = 300;
-
 export const styles = (theme) => ({    
     drawerPaper: {
       position: 'relative',
-      width: drawerWidth,
-      backgroundColor: theme.drawer.backgroundColor
+      width: theme.drawerWidthLeft,
+      backgroundColor: theme.palette.secondary.main
     },
     paperForm: {
       padding: '20px 5px 20px 5px',
       margin: 5,
-      backgroundColor: theme.drawer.backgroundColor,
+      backgroundColor: theme.palette.secondary.main,
       boxShadow: 'none'
 
     }

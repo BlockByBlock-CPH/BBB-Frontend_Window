@@ -13,11 +13,11 @@ const HorizontalBarChart = (props) => {
         return (   
             {
                 label: ''+index+'',
-                backgroundColor: 'rgba(0, 229, 255,0.6)',
-                borderColor: 'rgba(0, 229, 255,1)',
+                backgroundColor: 'rgba(0, 151, 167,0.7)',
+                borderColor: 'rgba(0, 151, 167,1)',
                 borderWidth: 1,
-                hoverBackgroundColor: 'rgba(0, 229, 255,1)',
-                hoverBorderColor: 'rgba(0, 229, 255,1)',
+                hoverBackgroundColor: 'rgba(0, 151, 167,1)',
+                hoverBorderColor: 'rgba(0, 151, 167,1)',
                 data: Object.values(serie).map(s => {return(s)})
             }
         );

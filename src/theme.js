@@ -5,38 +5,35 @@ const boxShadow = '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0
 
 export const theme = createMuiTheme({
     palette: {
+        primary: {
+            main: cyan.A700
+        },
+        secondary: {
+            light: grey[400],
+            main: grey[800],
+            dark: grey[900]
+        }
     },
-    mainContent: {
-        backgroundColor: grey[800]
-    },
-    drawer: {
-        backgroundColor: grey[800]
-    },
-    drawerHeader: {
-        backgroundColor: grey[900]
-    },
-    table: {
-        color: grey[400],
-        fontSize: '0.8rem',
-        borderBottom: '1px solid '+ grey[800]
-    },
-    modalContainer: {
-        backgroundColor: grey[800]
+    drawerWidthMain: 300,
+    drawerWidthLeft: 300,
+    drawerWidthRight: 300,
+    borderBotomColor: {
+        borderBotom: '2px solid '+grey[800]
     },
     typography: {
         useNextVariants: true,
         // Use the system font instead of the default Roboto font.
         fontFamily: [
-          '-apple-system',
-          'BlinkMacSystemFont',
-          '"Segoe UI"',
-          'Roboto',
-          '"Helvetica Neue"',
-          'Arial',
-          'sans-serif',
-          '"Apple Color Emoji"',
-          '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"',
+                    '-apple-system',
+                    'BlinkMacSystemFont',
+                    '"Segoe UI"',
+                    'Roboto',
+                    '"Helvetica Neue"',
+                    'Arial',
+                    'sans-serif',
+                    '"Apple Color Emoji"',
+                    '"Segoe UI Emoji"',
+                    '"Segoe UI Symbol"',
         ].join(','),
         fontWeightMedium: 500,
         body1: {
@@ -60,7 +57,7 @@ export const theme = createMuiTheme({
             root: {
                 width: '100%',
                 height: 30,
-                background: 'linear-gradient(15deg,'+ cyan.A400 +' 10%,'+ cyan.A700 +' 100%)',
+                background: 'linear-gradient(15deg,'+ cyan[600] +' 10%,'+ cyan.A700 +' 100%)',
                 borderRadius: 4,
                 border: 0,
                 color: grey[200]+' !important',
@@ -95,17 +92,25 @@ export const theme = createMuiTheme({
                 fontSize: '0.8rem'
             }
         },
-        MuiFormControl: {
+        MuiFormControl: {                                                                                                                                                                                                                           
             root: {
                 flexDirection: 'initial',
                 marginTop: '0 !important',
                 marginBottom: '10px !important'
             }
         },
+        MuiTableCell: {
+            root: {
+                color:grey[400]+' !important',
+                fontSize: '0.8rem',
+                borderBottom: '1px solid '+ grey[800]
+            }
+        },
         MuiSvgIcon: {
             root: {
-                color: cyan.A400+' !important',
+                color: cyan.A700+' !important',
                 fontSize: 20
+
             }
         }
     }

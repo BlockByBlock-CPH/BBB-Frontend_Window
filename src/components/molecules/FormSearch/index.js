@@ -64,7 +64,6 @@ const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, sug
                     type="submit"
                     id="btnSearch"
                 >
-                    <Search /> 
                     Search
                 </Button>
             </div>

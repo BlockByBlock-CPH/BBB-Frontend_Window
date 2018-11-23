@@ -32,7 +32,7 @@ export const styles = (theme) => ({
     PaperModal: {
         position: 'absolute',
         width: '40%',
-        backgroundColor: theme.modalContainer.backgroundColor,
+        backgroundColor: theme.palette.secondary.main,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
         '&:focus':{

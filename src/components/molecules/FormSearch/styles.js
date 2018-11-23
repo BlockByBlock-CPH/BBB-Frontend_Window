@@ -1,8 +1,4 @@
-import { cyan } from '@material-ui/core/colors';
-
-const borderBotom = '1px solid '+cyan.A400;
-
-export const styles = () => ({
+export const styles = (theme) => ({
   buttonContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -14,24 +10,14 @@ export const styles = () => ({
       // color: '#008b8b'
     }
   },
-  textField: {
-    '&:hover': {
-      borderBottom: borderBotom,
-      color: cyan.A400
-    },
-    '&:before': {
-      borderBottom: 'none'
-    },
-    '&:after': {
-        borderBottom: borderBotom
-    }
-  },
   menuItem: {
     '&:hover': {
-      color: cyan.A400
+      fontSize: 16,
+      color: theme.palette.primary.main,
+      border: theme.borderBotomColor.borderBotom
     }
   },
   iconSearch: {
-    cursor: 'pointer'
+    cursor: 'pointer',
   }
 });

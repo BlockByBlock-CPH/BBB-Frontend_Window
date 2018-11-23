@@ -14,10 +14,7 @@ export const styles = (theme) => ({
         height: 10
     },
     infoMessage: {
-        backgroundColor: '#282828',
-    },
-    icon: {
-        fontSize: 20,
+        backgroundColor: theme.palette.secondary.main,
     },
     iconVariant: {
         opacity: 0.9,

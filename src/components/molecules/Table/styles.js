@@ -1,4 +1,4 @@
-export const styles = (theme) => ({
+export const styles = () => ({
     table: {
         maxWidth: '100%',
         maxHeight: '100%',
@@ -7,17 +7,10 @@ export const styles = (theme) => ({
     },
     tableHead: {
         padding: '5px',
-        color: theme.table.color,
-        fontSize: theme.table.fontSize,
         fontWeight: 800,
         textAlign: 'left',
-        borderBottom: theme.table.borderBottom
     },
     tableCell: {
-        // borderBottom: 'none',
-        padding: '5px',
-        color: theme.table.color,
-        fontSize: theme.table.fontSize,
-        borderBottom: theme.table.borderBottom
+        padding: '5px'
     }
 });

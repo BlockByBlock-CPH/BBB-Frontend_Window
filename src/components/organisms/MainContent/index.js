@@ -42,7 +42,7 @@ const MainContent = (props) => {
                             aria-describedby="client-snackbar"
                             message={
                                 <span id="client-snackbar" className={classes.message}>
-                                <InfoIcon className={classNames(classes.icon, classes.iconVariant)} />
+                                <InfoIcon className={classNames(classes.iconVariant)} />
                                 There are not any information about this address!
                                 </span>
                             }

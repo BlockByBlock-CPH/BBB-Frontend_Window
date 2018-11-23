@@ -8,6 +8,8 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 import { theme } from './theme';
 
+console.log(theme);
+
 ReactDOM.render(
 <Provider store={store}>
     <MuiThemeProvider theme={theme}>

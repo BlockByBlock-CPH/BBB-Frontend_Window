@@ -1,10 +1,5 @@
-import { cyan } from '@material-ui/core/colors';
-
-const boxShadow = '0 1px 0px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.1)';
-
 export const styles = theme => ({
     root: {
-    //   height: 250,
       flexGrow: 1,
     },
     container: {
@@ -19,10 +14,12 @@ export const styles = theme => ({
     },
     suggestion: {
       display: 'block',
-      boxShadow: boxShadow,
+      boxShadow: theme.shadows[5],
       borderRadius: 0,
       '&:hover': {
-        color: cyan.A400
+        fontSize: 16,
+        color: theme.palette.primary.main,
+        border: theme.borderBotomColor.borderBotom
       }
     },
     suggestionsList: {
@@ -38,12 +35,12 @@ export const styles = theme => ({
         marginRight: 5
     },
     paper: {
-        width: 280,
+        width: '94%',
         position: 'absolute',
         zIndex: 100,
-        boxShadow: boxShadow
+        boxShadow: theme.shadows[5] 
     },
     menuItems: {
-      boxShadow: boxShadow
+      boxShadow: theme.shadows[5] 
     }
   });
