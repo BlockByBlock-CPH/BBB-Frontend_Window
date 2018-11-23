@@ -101,7 +101,7 @@ export const theme = createMuiTheme({
         },
         MuiTableCell: {
             root: {
-                color:grey[400]+' !important',
+                color: grey[400]+' !important',
                 fontSize: '0.8rem',
                 borderBottom: '1px solid '+ grey[800]
             }
