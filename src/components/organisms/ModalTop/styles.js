@@ -23,7 +23,7 @@ export const styles = (theme) => ({
         boxShadow: theme.shadows[5],
         padding: '20px 30px 50px',
         '&:focus':{
-            border: '2px solid '+cyan.A400
+            border: '2px solid '+theme.palette.primary.main
         }
     },
     iconContainer: {
