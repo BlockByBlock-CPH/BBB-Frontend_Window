@@ -87,9 +87,10 @@ class MapBBB extends Component {
         });
 
         const source = new XYZ({
-            url: `https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=${access_token}`
+            
+            //url: `https://api.mapbox.com/styles/v1/max-cl/cjo4qlyz90a7f2rou5h3ozfcv/tiles/256/{z}/{x}/{y}@2x?access_token=${access_token}` //light
+            url: `https://api.mapbox.com/styles/v1/max-cl/cjo4qkmab07c52sqrx6vmoa11/tiles/256/{z}/{x}/{y}@2x?access_token=${access_token}` //dark
         });
-          
           
         const baseLayer = new TileLayer({
             source: source
@@ -128,7 +129,7 @@ class MapBBB extends Component {
         
         const circleFeature = new Feature(circle);  
 
-        const painted = this.paintLayer('rgba(180, 0, 0, 0.5)', 'rgba(180, 0, 0, 1)', 2);
+        const painted = this.paintLayer('rgba(180, 0, 0, 0.1)', 'rgba(180, 0, 0, 1)', 2);
         circleFeature.setStyle(painted);  
 
         const vectorSource = new VectorSource({
@@ -267,7 +268,7 @@ class MapBBB extends Component {
         // Create feature with polygon.
         var feature = new Feature(polygon);
 
-        const painted = this.paintLayer('rgba(0, 229, 255, 0.2)', 'rgba(0, 229, 255, 0.8)', 1);
+        const painted = this.paintLayer('rgba(0, 229, 255, 0.1)', 'rgba(0, 229, 255, 0.8)', 1);
         feature.setStyle(painted);
     
         // Create vector source and the feature to it.
