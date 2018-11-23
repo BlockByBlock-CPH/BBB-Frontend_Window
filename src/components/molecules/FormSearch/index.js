@@ -29,7 +29,8 @@ const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, sug
                     endAdornment:( 
                         <InputAdornment position={'end'}>
                             <Icon>
-                                <Search className={classes.iconSearch} onClick={searchAddress}/></Icon>
+                                <Search className={classes.iconSearch} onClick={searchAddress}/>
+                            </Icon>
                         </InputAdornment>
                     )
                 }} 

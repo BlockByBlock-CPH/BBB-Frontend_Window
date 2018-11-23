@@ -11,19 +11,6 @@ export const styles = (theme) => ({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    PaperButton: {
-        padding: 10,
-        marginTop: 5,
-        marginBottom: 5,
-        marginLeft: 5,
-        marginRight: 5,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    Button: {
-        padding: '10px 30px'
-    },
     Modal:{
         display: 'flex',
         alignItems: 'center',
@@ -34,9 +21,22 @@ export const styles = (theme) => ({
         width: '40%',
         backgroundColor: theme.palette.secondary.main,
         boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit * 4,
+        padding: '20px 30px 50px',
         '&:focus':{
             border: '2px solid '+cyan.A400
         }
+    },
+    iconContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: '0 0 10px 0'
+    },
+    icon: {
+        fontSize: 30,
+        cursor: 'pointer'
+    },
+    separate: {
+        height: 10
     }
 });

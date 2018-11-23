@@ -161,8 +161,8 @@ class HomeContainer extends Component {
     dataTop = (data) => {      
         let dataChartTop1 = Object.assign({}, data.chart1);
         let dataChartTop2 = Object.assign({}, data.chart2);
-        dataChartTop1.title = { "0": "TOP MAX PEOPLE BY ZONE"};
-        dataChartTop2.title = { "0": "TOP MIN PEOPLE BY ZONE"};
+        dataChartTop1.title = { "0": "TOP 5 MAX PEOPLE BY ZONE"};
+        dataChartTop2.title = { "0": "TOP 5 MIN PEOPLE BY ZONE"};
         this.setState({ dataTC: { dataChartTop1, dataChartTop2 }});
     }
 

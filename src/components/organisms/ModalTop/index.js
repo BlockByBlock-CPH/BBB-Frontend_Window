@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, Button, Modal, Typography } from '@material-ui/core';
+import { Paper, Modal, Icon } from '@material-ui/core';
+import  { Clear } from '@material-ui/icons';
 
 //Components
 import HBarChart from '../../molecules/HBarChart';
@@ -24,27 +25,21 @@ const ModalTop = (props) => {
             className={classes.Modal}
         >
             <div className={classes.PaperModal}>
-                <Typography align="center" variant="h4" id="modal-title">
-                    Top 5
-                </Typography>
+                <div className={classes.iconContainer}>
+                    <Icon onClick={handleClose}>
+                        <Clear className={classes.icon}/>
+                    </Icon>
+                </div>
                 <Paper className={classes.Paper}>
                 {
                     Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop1} /> : <Spinner size={40} />
                 }
                 </Paper>
+                <div className={classes.separate} />
                 <Paper className={classes.Paper}>
                 {
                     Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop2} /> : <Spinner size={40} />
                 }
-                </Paper>
-                <Paper className={classes.PaperButton}>
-                    <Button 
-                        className={classes.Button}
-                        variant="contained" 
-                        color="primary" 
-                        type="button"
-                        onClick={handleClose}
-                    >Close</Button>
                 </Paper>
             </div>
         </Modal>
