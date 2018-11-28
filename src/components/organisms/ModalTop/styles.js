@@ -1,5 +1,3 @@
-import { cyan } from '@material-ui/core/colors';
-
 export const styles = (theme) => ({
     Paper: {
         padding: 5,

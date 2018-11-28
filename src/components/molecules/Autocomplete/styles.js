@@ -17,8 +17,8 @@ export const styles = theme => ({
       boxShadow: theme.shadows[5],
       borderRadius: 0,
       '&:hover': {
-        fontSize: 16,
-        color: theme.palette.primary.main,
+        fontSize: 15,
+        color: theme.palette.secondary.light,
         border: theme.borderBotomColor.borderBotom
       }
     },
