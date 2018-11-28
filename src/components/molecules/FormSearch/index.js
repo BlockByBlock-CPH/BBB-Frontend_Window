@@ -25,7 +25,7 @@ const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, sug
                 onChange={handleChange}
                 value={searchedAddress}  
                 InputProps={{ 
-                    classes: { underline: classes.textField }, 
+                    classes: { underline: classes.textField, focused: classes.textFieldFocused }, 
                     endAdornment:( 
                         <InputAdornment position={'end'}>
                             <Icon>
@@ -47,7 +47,7 @@ const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, sug
                 margin="normal"
                 fullWidth={true}
                 id="selectDay"
-                InputProps={{ classes: { underline: classes.textField } }} 
+                InputProps={{ classes: { underline: classes.textField, focused: classes.textFieldFocused } }} 
             >
             {
                 listDays.map(option => (
