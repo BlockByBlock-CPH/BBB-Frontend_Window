@@ -32,7 +32,7 @@ const MainContent = (props) => {
                             //polygonZone={polygonZone}
                         />
                     </Paper>
-                    <div className={classes.separate} />
+                    {/* <div className={classes.separate} />
                     <Paper className={classes.paper}>
                     {    
                         totalDataMC > 0 ?
@@ -48,7 +48,7 @@ const MainContent = (props) => {
                             }
                         />
                     }                        
-                    </Paper>
+                    </Paper> */}
                 </Grid> 
                 : 
                 <Grid item sm={12}>

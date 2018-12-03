@@ -1,14 +1,15 @@
 export const styles = (theme) => ({
     gridContainer: {
         height: '100%',
-        padding: 10
+        //padding: 10
     },
     paper: {
-        padding: 5,
+        //padding: 5,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: 'calc(50% - 32px - 5px - 5px - 5px) !important'
+        // height: 'calc(50% - 32px - 5px - 5px - 5px) !important'
+        height: '100%'
     },
     separate: {
         height: 10

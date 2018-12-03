@@ -57,7 +57,7 @@ const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, sug
                 ))
             }
             </TextField>
-            <div className={classes.buttonContainer}>
+            {/* <div className={classes.buttonContainer}>
                 <Button
                     variant="contained" 
                     color="primary" 
@@ -66,7 +66,7 @@ const FormSearch = ({ classes, searchAddress, handleChange, searchedAddress, sug
                 >
                     Search
                 </Button>
-            </div>
+            </div> */}
             
         </form>
     )
@@ -78,7 +78,3 @@ FormSearch.propTypes = {
 };
   
 export default withStyles(styles, { withTheme: true })(FormSearch);
-
-  
-  
-  

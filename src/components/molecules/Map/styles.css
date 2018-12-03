@@ -9,27 +9,40 @@
     height: 100%;
     width: 100%;
   }
-  .map:-webkit-full-screen {
-    height: 100%;
-    width: 100%;
-  }
-  .map:-ms-fullscreen {
-    height: 100%;
-    width: 100%;
-  }
-  .map:fullscreen {
-    height: 100%;
-    width: 100%;
-  }
-  .ol-rotate {
-    top: 3em;
-  }
+.map:-webkit-full-screen {
+  height: 100%;
+  width: 100%;
+}
+.map:-ms-fullscreen {
+  height: 100%;
+  width: 100%;
+}
+.map:fullscreen {
+  height: 100%;
+  width: 100%;
+}
+.ol-rotate {
+  top: 3em;
+}
 
-  .ol-zoom-in, .ol-zoom-out, .ol-zoomslider-thumb, .ol-full-screen-false, .ol-full-screen-true {
-    background-color: #212121 !important;
-    color: #BDBDBD !important;
-  }
+.ol-zoom-in, .ol-zoom-out, .ol-zoomslider-thumb, .ol-full-screen-false, .ol-full-screen-true {
+  background-color: #212121 !important;
+  color: #BDBDBD !important;
+}
 
-  .ol-zoomslider {
-    height: 150px;
+.ol-zoomslider {
+  height: 150px;
+  top: 10em;
+  left: 1em;
+}
+
+.ol-full-screen {
+  z-index: 1000;
+  right: 1em;
+  top: 1em;
+}
+
+.ol-zoom {
+  top: 5em;
+  left: 1em;
 }

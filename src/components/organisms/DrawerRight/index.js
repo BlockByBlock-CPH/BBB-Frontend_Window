@@ -7,7 +7,7 @@ import InfoIcon from '@material-ui/icons/Info';
 
 //Components
 import RightContent from '../../organisms/RightContent';
-import DrawerHeaderRight from '../../molecules/DrawerHeaderRight';
+// import DrawerHeaderRight from '../../molecules/DrawerHeaderRight';
 
 //Styles
 import { styles } from './styles';
@@ -23,9 +23,9 @@ const DrawerRight = (props) => {
                 paper: classes.drawerPaperRight,
             }}
         >
-            <DrawerHeaderRight title={title} />
+            {/* <DrawerHeaderRight title={title} />
     
-            <Divider />  
+            <Divider />   */}
     
             {
                 totalDataTH > 0 ?

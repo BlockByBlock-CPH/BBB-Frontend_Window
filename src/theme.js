@@ -43,7 +43,7 @@ export const theme = createMuiTheme({
             color: grey[200],
         },
         subtitle1: {
-          fontSize: 16,
+          fontSize: 12,
           color: grey[200]
         },
         button: {
@@ -103,7 +103,7 @@ export const theme = createMuiTheme({
             root: {
                 color: grey[400]+' !important',
                 fontSize: '0.8rem',
-                borderBottom: '1px solid '+ grey[800]
+                borderBottom: '1px solid '+ grey[900]
             }
         },
         MuiSvgIcon: {

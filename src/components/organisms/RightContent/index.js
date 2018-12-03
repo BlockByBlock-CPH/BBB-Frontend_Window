@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Paper, Button } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
 
 //Components
-import ModalTop from '../ModalTop';
+//import ModalTop from '../ModalTop';
 import TableBBB from '../../molecules/Table';
 import Spinner from '../../atoms/Spinner';
+import HBarChart from '../../molecules/HBarChart';
 
 //Styles
 import { styles } from './styles';
@@ -33,13 +34,29 @@ class RightContent extends Component {
     const { classes, dataTH, dataTC } = this.props;
 
     return (
-        <Grid item sm={12}>
-            <Paper className={classes.Paper}>
+        <Grid item sm={12} className={classes.grid}>
+            <Paper className={classes.paper}>
             {
                 Object.keys(dataTH).length ? <TableBBB dataTH={dataTH} /> : <Spinner size={40} />
             }
             </Paper>
-            <Paper className={classes.PaperButton}>
+            <Paper className={classes.paperTop}>
+            {
+                Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop1}/> : <Spinner size={40} />
+            }
+            </Paper>
+            <Paper className={classes.paperTop}>
+            {
+                Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop2}/> : <Spinner size={40} />
+            }
+            </Paper>
+            {/* <Paper className={classes.Paper}>
+                <PieChart />
+            </Paper>
+            <Paper className={classes.Paper}>
+                <DoughnutChart />
+            </Paper> */}
+            {/* <Paper className={classes.PaperButton}>
                 <Button 
                     className={classes.Button}
                     variant="contained" 
@@ -55,7 +72,7 @@ class RightContent extends Component {
                 dataTC={dataTC}
                 handleClose={this.handleClose}
                 open={this.state.open}
-            />          
+            />           */}
         </Grid> 
     )
   }

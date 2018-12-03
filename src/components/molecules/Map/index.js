@@ -88,8 +88,8 @@ class MapBBB extends Component {
 
         const source = new XYZ({
             
-            url: `https://api.mapbox.com/styles/v1/max-cl/cjo4qlyz90a7f2rou5h3ozfcv/tiles/256/{z}/{x}/{y}?access_token=${access_tokenLight}#18.4/48.136484/11.575265/0` //light
-            //url: `https://api.mapbox.com/styles/v1/max-cl/cjo4qkmab07c52sqrx6vmoa11/tiles/256/{z}/{x}/{y}?access_token=${access_tokenDark}#10/42.3624/-71.02` //dark
+            //url: `https://api.mapbox.com/styles/v1/max-cl/cjo4qlyz90a7f2rou5h3ozfcv/tiles/256/{z}/{x}/{y}?access_token=${access_tokenLight}#18.4/48.136484/11.575265/0` //light
+            url: `https://api.mapbox.com/styles/v1/max-cl/cjo4qkmab07c52sqrx6vmoa11/tiles/256/{z}/{x}/{y}?access_token=${access_tokenDark}#10/42.3624/-71.02` //dark
             //url: `https://api.mapbox.com/styles/v1/max-cl/cjo4qkmab07c52sqrx6vmoa11/tiles/256/{z}/{x}/{y}@2x?access_token=${access_token}` //dark
             
         });

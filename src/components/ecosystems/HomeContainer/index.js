@@ -203,7 +203,7 @@ class HomeContainer extends Component {
             //selectedCoord: selectAddress[0].coord,
             listActive: false,
             openRight: true,
-            openLeft: false,
+            openLeft: true,
             selectedAddress: true,
             searched: false,
             suggestions: []
@@ -241,11 +241,6 @@ class HomeContainer extends Component {
                         anchor={anchorLeft}
                         handleDrawerOpen={this.handleDrawerOpen}
                         title={appTitleHeader}
-                    />
-                    <DrawerLeft 
-                        anchor={anchorLeft}
-                        open={openLeft}
-                        handleDrawerClose={this.handleDrawerClose}
                         searchAddress={this.handleClick}
                         handleChange={this.handleChange}
                         selectAddress={this.selectAddress}
@@ -255,6 +250,13 @@ class HomeContainer extends Component {
                         listActive={listActive}
                         selectedDay={selectedDay}
                     />
+                  
+                    <DrawerLeft 
+                        anchor={anchorLeft}
+                        open={openLeft}
+                        handleDrawerClose={this.handleDrawerClose}
+                        dataTC={dataTC}
+                    />
                     <main
                         className={classNames(classes.content, classes[`content-${anchorLeft}`],
                         {
@@ -263,7 +265,7 @@ class HomeContainer extends Component {
                             [classes.contentChanged]: selectedAddress,
                         })}
                     >
-                        <div className={classes.drawerHeader} />
+                        {/* <div className={classes.drawerHeader} /> */}
                         
                         <MainContent 
                             selectedAddress={selectedAddress} 

@@ -41,7 +41,7 @@ const HorizontalBarChart = (props) => {
                 },
                 gridLines: {
                     color: '#292929',
-                    display: true
+                    display: false
                 }
             }],
             xAxes: [{
@@ -51,7 +51,7 @@ const HorizontalBarChart = (props) => {
                 },
                 gridLines: {
                     color: '#292929',
-                    display: true
+                    display: false
                 }
             }]
         },
