@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Paper } from '@material-ui/core';
@@ -12,40 +12,32 @@ import Filters from '../../molecules/Filters';
 import { styles } from './styles';
 
 
-class LeftContent extends Component {
-    render(){
+const LeftContent = (props) => {
 
-    const { classes } = this.props;
+    const { classes, selectedDay, handleChangeSelecteDay } = props;
 
     return (
         <Grid item sm={12} className={classes.grid}>
-        <Paper className={classes.paperFilters}>
-            <Filters />
-        </Paper>
-        <Paper className={classes.paper}>
-            <PieChart />
-        </Paper>
-        <Paper className={classes.paper}>
-            <DoughnutChart />
-        </Paper>
-        {/* <Paper className={classes.paperTop}>
-        {
-            Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop1}/> : <Spinner size={40} />
-        }
-        </Paper>
-        <Paper className={classes.paperTop}>
-        {
-            Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop2}/> : <Spinner size={40} />
-        }
-        </Paper> */}
+            <Paper className={classes.paperFilters}>
+                <Filters 
+                    handleChangeSelecteDay={handleChangeSelecteDay} 
+                    selectedDay={selectedDay} 
+                />
+            </Paper>
+            <Paper className={classes.paper}>
+                <PieChart />
+            </Paper>
+            <Paper className={classes.paper}>
+                <DoughnutChart />
+            </Paper>
         </Grid> 
     )
-  }
 }
 
 LeftContent.propTypes = {
     classes: PropTypes.object.isRequired,
-    dataTC: PropTypes.object.isRequired
+    handleChangeSelecteDay: PropTypes.func.isRequired,
+    selectedDay: PropTypes.number.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(LeftContent);

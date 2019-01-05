@@ -1,4 +1,7 @@
 export const styles = (theme) => ({
+  form: {
+    width: '100%'
+  },
   buttonContainer: {
     display: 'flex',
     alignItems: 'center',

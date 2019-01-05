@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { Grid, Paper } from '@material-ui/core';
 
 //Components
-//import ModalTop from '../ModalTop';
 import TableBBB from '../../molecules/Table';
 import Spinner from '../../atoms/Spinner';
 import HBarChart from '../../molecules/HBarChart';
@@ -50,29 +49,6 @@ class RightContent extends Component {
                 Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop2}/> : <Spinner size={40} />
             }
             </Paper>
-            {/* <Paper className={classes.Paper}>
-                <PieChart />
-            </Paper>
-            <Paper className={classes.Paper}>
-                <DoughnutChart />
-            </Paper> */}
-            {/* <Paper className={classes.PaperButton}>
-                <Button 
-                    className={classes.Button}
-                    variant="contained" 
-                    color="primary" 
-                    type="button"
-                    onClick={this.handleOpen}
-                >
-                    See More
-                </Button>
-            </Paper>
-            
-            <ModalTop 
-                dataTC={dataTC}
-                handleClose={this.handleClose}
-                open={this.state.open}
-            />           */}
         </Grid> 
     )
   }

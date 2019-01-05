@@ -67,7 +67,7 @@ class HomeContainer extends Component {
     componentDidUpdate(prevProps,prevState) {
         if(this.state.searched !== prevState.searched){
             this.searchAddress(this.state.searchedAddress);
-        } else if(this.props.mainChart !== prevProps.mainChart) {
+        } else if(this.props.mainChart !== prevProps.mainChart){
             this.dataMainChart(this.props.mainChart);
         } else if(this.props.tableHome !== prevProps.tableHome){
             this.dataTableHome(this.props.tableHome);
@@ -76,7 +76,10 @@ class HomeContainer extends Component {
         }
     }
 
-    /** */
+    /** 
+     * @param data: Address from input text
+     * @description Get Address information from API (Geocoder), after set the information into addressInfo State
+    */
     searchAddress = (data) => {
         if(data !== '')
         {
@@ -111,7 +114,11 @@ class HomeContainer extends Component {
           });
         }
     }
-    
+
+    /**
+     * @param data: Address informations got it from API (geocoder)
+     * @description genertate the suggestion of addresses
+     */
     makeSuggestions = (data) => {
         let list_suggestions = [];
         let suggestions = data.map((resp,index) =>{
@@ -131,8 +138,10 @@ class HomeContainer extends Component {
         this.setState({ suggestions });
     }
 
-    /** */
-
+    /** 
+     * @param data: mainChart state from redux
+     * @description recieve mainChart state and prepare that information to send it as props to generate the main chart.
+    */
     dataMainChart = (data) => {      
         let dataMC = Object.assign({}, data);
             
@@ -144,11 +153,12 @@ class HomeContainer extends Component {
         }        
     }
 
+    /**
+     * @param data: tableHome state from redux
+     * @description recieve tableHome state and prepare that information to send it as props to generate the table.
+     */
     dataTableHome = (data) => {      
-        let td = Object.assign({}, data);
-        let dataTH = {};
-        td = Object.keys(td).map(i => td[i])
-        dataTH = {td};
+        let dataTH = { td: data.td };
 
         if(this.props.selectedDay > 0){
             dataTH.th = ["","DAY","HOUR","PEOPLE"];
@@ -158,22 +168,38 @@ class HomeContainer extends Component {
         this.setState({ dataTH: dataTH });
     }
 
-    dataTop = (data) => {      
-        let dataChartTop1 = Object.assign({}, data.chart1);
-        let dataChartTop2 = Object.assign({}, data.chart2);
+    /**
+     * @param data: dataTop state from redux
+     * @description recieve dataTop state and prepare that information to send it as props to generate the top Charts.
+     */
+    dataTop = (data) => {
+        let dataChartTop1 = data.chart1;
+        let dataChartTop2 = data.chart2;
         dataChartTop1.title = { "0": "TOP 5 MAX PEOPLE BY ZONE"};
         dataChartTop2.title = { "0": "TOP 5 MIN PEOPLE BY ZONE"};
         this.setState({ dataTC: { dataChartTop1, dataChartTop2 }});
     }
 
+    /**
+     * @param none
+     * @description handle the open drawer left panel
+     */
     handleDrawerOpen = () => {
         this.setState({ openLeft: true });
     }
     
+    /**
+     * @param none
+     * @description handle the close drawer left panel
+     */
     handleDrawerClose = () => {
         this.setState({ openLeft: false });
     }
 
+    /**
+     * @param event: behavior of the input Address
+     * @description handle the changes of the input text (Address)
+     */
     handleChange = (e) => {
         let searchTxt = e.target.value;
         this.setState({ 
@@ -184,6 +210,10 @@ class HomeContainer extends Component {
         }); 
     }
 
+    /**
+     * @param event: behavior of the menu options days
+     * @description handle the changes of the menu options days
+     */
     handleChangeSelecteDay = (e) => {
         let selectedDay = e.target.value;
         this.setState({ 
@@ -191,7 +221,10 @@ class HomeContainer extends Component {
         });    
     }
 
-    //OnClick AutocompleteComponent
+    /**
+     * @param event: behavior of the suggestions options addresses
+     * @description OnClick of AutocompleteComponent (suggesttions options adresses)
+     */
     selectAddress = (event) => {
         const suggestions = [...this.state.suggestions];
         const { selectedDay } = this.state;
@@ -210,6 +243,11 @@ class HomeContainer extends Component {
         });
     }
 
+    /**
+     * @param event: behavior of the form (use preventDefault to avoid refresh the page)
+     * @description handle the submit form to search the information about the specific address 
+     * and generate and show all of the visualization (map, tables, charts, etc.)
+     */
     handleClick = (event) => {
         event.preventDefault();              
         this.setState({
@@ -244,18 +282,17 @@ class HomeContainer extends Component {
                         searchAddress={this.handleClick}
                         handleChange={this.handleChange}
                         selectAddress={this.selectAddress}
-                        handleChangeSelecteDay={this.handleChangeSelecteDay}
                         searchedAddress={searchedAddress}
                         suggestions={suggestions}
                         listActive={listActive}
-                        selectedDay={selectedDay}
                     />
                   
                     <DrawerLeft 
                         anchor={anchorLeft}
                         open={openLeft}
                         handleDrawerClose={this.handleDrawerClose}
-                        dataTC={dataTC}
+                        handleChangeSelecteDay={this.handleChangeSelecteDay}
+                        selectedDay={selectedDay}
                     />
                     <main
                         className={classNames(classes.content, classes[`content-${anchorLeft}`],

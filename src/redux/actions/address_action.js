@@ -28,11 +28,11 @@ export function setChosenLocation(data, selectedDay){
             };
             dispatch({ type: SELECTED_INFO, payload: selectedInfo });
             dispatch(getDataMainChart(MAIN_CHART_WEEK));
-            dispatch(getDataTableHome(TABLEHOME_WEEK));
+            dispatch(getDataTableHome(`${TABLEHOME_WEEK}/${longAddress}/${latAddress}`));
             dispatch(getDataTop(topChart));
 
         }else if(day > 0){
-            const topChart = [TOP_CHART1_DAY,TOP_CHART2_DAY];
+            const topChart = [`${TOP_CHART1_DAY}/${day}`,`${TOP_CHART2_DAY}/${day}`];
             const selectedInfo = { 
                 coordAddress: coordAddress, 
                 pointAddress: pointAddress, 
@@ -40,57 +40,11 @@ export function setChosenLocation(data, selectedDay){
             };
             dispatch({ type: SELECTED_INFO, payload: selectedInfo });
             dispatch(getDataMainChart(MAIN_CHART_DAY));
-            dispatch(getDataTableHome(TABLEHOME_DAY));
+            dispatch(getDataTableHome(`${TABLEHOME_DAY}/${longAddress}/${latAddress}/${day}`));
             dispatch(getDataTop(topChart));
         }
     }
 }
-
-// export function searchAddress(address, selectedDay) {
-//     return async (dispatch, getState) => {
-//         dispatch({ type: GET_ADDRESS_REQUEST });
-//         try {
-//             const response = await axios.get(API_PHOTON+address);
-//             dispatch({ type: GET_ADDRESS_SUCCESS, payload: response });
-            
-//             const { infoAddress } = getState().address;
-//             const longAddress = infoAddress[0].lon;  // TODO: CUANDO tenga el suggestions cambiar esto
-//             const latAddress = infoAddress[0].lat;  // TODO: CUANDO tenga el suggestions cambiar esto
-//             const coordAddress = { latAddress: latAddress, longAddress: longAddress }
-//             const pointAddress = 'POINT(' + longAddress + ' ' + latAddress + ')';
-//             const day = parseInt(selectedDay, 10);
-            
-//             if(day === 0){         
-//                 const topChart = [TOP_CHART1_WEEK,TOP_CHART2_WEEK];
-//                 const selectedInfo = { 
-//                     coordAddress: coordAddress, 
-//                     pointAddress: pointAddress, 
-//                     selectedDay: day
-//                 };
-//                 dispatch({ type: SELECTED_INFO, payload: selectedInfo });
-//                 dispatch(getDataMainChart(MAIN_CHART_WEEK));
-//                 dispatch(getDataTableHome(TABLEHOME_WEEK));
-//                 dispatch(getDataTop(topChart));
-    
-//             }else if(day > 0){
-//                 const topChart = [TOP_CHART1_DAY,TOP_CHART2_DAY];
-//                 const selectedInfo = { 
-//                     coordAddress: coordAddress, 
-//                     pointAddress: pointAddress, 
-//                     selectedDay: day
-//                 };
-//                 dispatch({ type: SELECTED_INFO, payload: selectedInfo });
-//                 dispatch(getDataMainChart(MAIN_CHART_DAY));
-//                 dispatch(getDataTableHome(TABLEHOME_DAY));
-//                 dispatch(getDataTop(topChart));
-//             }           
-
-//         } catch (error) {
-//             dispatch({ type: GET_ADDRESS_FAILURE, payload: error });
-//         }
-//     }
-// }
-
 
 function getDataMainChart(API_Url){
     return async (dispatch) => {
@@ -115,7 +69,6 @@ function getDataTableHome(API_Url){
         }
     }
 }
-
 
 function getDataTop(API_Url){
     return async (dispatch) => {

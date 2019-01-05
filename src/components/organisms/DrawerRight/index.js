@@ -2,18 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Drawer, Divider, SnackbarContent } from '@material-ui/core';
+import { Drawer, SnackbarContent } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 
 //Components
 import RightContent from '../../organisms/RightContent';
-// import DrawerHeaderRight from '../../molecules/DrawerHeaderRight';
 
 //Styles
 import { styles } from './styles';
 
 const DrawerRight = (props) => {
-    const { classes, anchor, open, title, dataTH, dataTC, totalDataTH } = props;
+    const { classes, anchor, open, dataTH, dataTC, totalDataTH } = props;
     return (
         <Drawer
             variant="persistent"
@@ -23,10 +22,6 @@ const DrawerRight = (props) => {
                 paper: classes.drawerPaperRight,
             }}
         >
-            {/* <DrawerHeaderRight title={title} />
-    
-            <Divider />   */}
-    
             {
                 totalDataTH > 0 ?
                 <RightContent 
@@ -52,10 +47,8 @@ const DrawerRight = (props) => {
 
 DrawerRight.propTypes = {
     classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired,
     anchor: PropTypes.string.isRequired,
     open: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired,
     dataTH: PropTypes.object.isRequired,
     dataTC: PropTypes.object.isRequired
 

@@ -23,22 +23,21 @@ export const styles = theme => ({
       }
     },
     suggestionsList: {
-        margin: 0,
-        padding: 0,
-        listStyleType: 'none',
+      margin: 0,
+      padding: 0,
+      listStyleType: 'none',
     },
     divider: {
       height: theme.spacing.unit * 2,
     },
     textField: {
-        width: 800,
-        marginRight: 5
+      width: 800,
+      marginRight: 5
     },
     paper: {
-        width: '94%',
-        position: 'absolute',
-        zIndex: 100,
-        boxShadow: theme.shadows[5] 
+      position: 'absolute',
+      zIndex: 100,
+      boxShadow: theme.shadows[5] 
     },
     menuItems: {
       boxShadow: theme.shadows[5] 
