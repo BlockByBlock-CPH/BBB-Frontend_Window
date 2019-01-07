@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { Drawer, SnackbarContent } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 //Components
 import RightContent from '../../organisms/RightContent';
@@ -24,10 +25,13 @@ const DrawerRight = (props) => {
         >
             {
                 totalDataTH > 0 ?
-                <RightContent 
-                    dataTH={dataTH} 
-                    dataTC={dataTC}
-                /> :
+                <Scrollbars>
+                    <RightContent 
+                        dataTH={dataTH} 
+                        dataTC={dataTC}
+                    /> 
+                </Scrollbars>
+                :
                 <SnackbarContent
                     className={classes.info}
                     aria-describedby="client-snackbar"
