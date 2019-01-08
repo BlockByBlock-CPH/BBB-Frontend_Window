@@ -24,7 +24,8 @@ import {
     getSelectedDayState, 
     getTableHomeState, 
     getDataTopState,
-    getAreaInfluenceState
+    getAreaInfluenceState,
+    getHomeZoneWheelPlotState
 } from '../../../redux/selectors/address_selector';
 
 //Styles
@@ -47,6 +48,7 @@ class HomeContainer extends Component {
           dataTH: {},
           dataTC: {},
           dataAI: {},
+          dataHW: {},
           loading: true,
           addressInfo: {},
           selectedAddress: false,
@@ -77,6 +79,8 @@ class HomeContainer extends Component {
             this.dataTop(this.props.dataTop);
         } else if(this.props.areaInfluence !== prevProps.areaInfluence){
             this.areaInfluence(this.props.areaInfluence);
+        } else if(this.props.dataHomeZoneWheel !== prevProps.dataHomeZoneWheel){
+            this.homezoneWheel(this.props.dataHomeZoneWheel);
         }
     }
 
@@ -194,6 +198,15 @@ class HomeContainer extends Component {
     }
 
     /**
+     * @param data: homezoneWheel state from redux
+     * @description recieve homezoneWheel state and prepare that information to send it as props to show the Homezone Wheel Plot.
+     */
+    homezoneWheel = (data) => {
+        const dataHW = data;
+        this.setState({ dataHW });
+    }
+
+    /**
      * @param none
      * @description handle the open drawer left panel
      */
@@ -273,7 +286,7 @@ class HomeContainer extends Component {
         
         const { classes, setInitMap, initialMap, coordAddress  } = this.props;
         const { anchorLeft, openLeft, anchorRight, openRight, appTitleHeader, titleRP, loading, 
-                dataMC, dataTH, dataTC, dataAI, searchedAddress, suggestions, listActive, selectedDay,
+                dataMC, dataTH, dataTC, dataAI, dataHW, searchedAddress, suggestions, listActive, selectedDay,
                 selectedAddress, polygonZone, totalDataMC, totalDataTH } = this.state;
 
         if(loading === true){
@@ -336,6 +349,7 @@ class HomeContainer extends Component {
                                 dataTH={dataTH}
                                 dataTC={dataTC}
                                 dataAI={dataAI}
+                                dataHW={dataHW}
                                 totalDataTH={totalDataTH}
                             /> 
                     }
@@ -366,7 +380,8 @@ function mapStateToProps({ address, map }) {
         selectedDay: getSelectedDayState(address),
         tableHome: getTableHomeState(address),
         dataTop: getDataTopState(address),
-        areaInfluence: getAreaInfluenceState(address)
+        areaInfluence: getAreaInfluenceState(address),
+        dataHomeZoneWheel: getHomeZoneWheelPlotState(address)
     }
 }
 

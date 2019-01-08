@@ -13,7 +13,7 @@ import RightContent from '../../organisms/RightContent';
 import { styles } from './styles';
 
 const DrawerRight = (props) => {
-    const { classes, anchor, open, dataTH, dataTC, dataAI, totalDataTH } = props;
+    const { classes, anchor, open, dataTH, dataTC, dataAI, dataHW, totalDataTH } = props;
     return (
         <Drawer
             variant="persistent"
@@ -30,6 +30,7 @@ const DrawerRight = (props) => {
                         dataTH={dataTH} 
                         dataTC={dataTC}
                         dataAI={dataAI}
+                        dataHW={dataHW}
                     /> 
                 </Scrollbars>
                 :
@@ -56,8 +57,8 @@ DrawerRight.propTypes = {
     open: PropTypes.bool.isRequired,
     dataTH: PropTypes.object.isRequired,
     dataTC: PropTypes.object.isRequired,
-    dataAI: PropTypes.object.isRequired
-
+    dataAI: PropTypes.object.isRequired,
+    dataHW: PropTypes.object.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(DrawerRight);

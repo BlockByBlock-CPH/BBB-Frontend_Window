@@ -4,11 +4,12 @@ import {
     GET_MAIN_CHART_REQUEST, GET_MAIN_CHART_SUCCESS, GET_MAIN_CHART_FAILURE,
     GET_TABLE_HOME_REQUEST,GET_TABLE_HOME_SUCCESS, GET_TABLE_HOME_FAILURE,
     GET_TOP_REQUEST, GET_TOP_SUCCESS, GET_TOP_FAILURE,
-    GET_AREA_INFLUENCE_REQUEST, GET_AREA_INFLUENCE_SUCCESS, GET_AREA_INFLUENCE_FAILURE
+    GET_AREA_INFLUENCE_REQUEST, GET_AREA_INFLUENCE_SUCCESS, GET_AREA_INFLUENCE_FAILURE,
+    GET_HOMEZONE_WHEEL_REQUEST, GET_HOMEZONE_WHEEL_SUCCESS, GET_HOMEZONE_WHEEL_FAILURE
 } from '../../constants/action_types';
 import { 
     MAIN_CHART_WEEK, MAIN_CHART_DAY, TOP_CHART1_WEEK, TOP_CHART2_WEEK, TOP_CHART1_DAY, TOP_CHART2_DAY,
-    TABLEHOME_WEEK, TABLEHOME_DAY, AREA_INFLUENCE_WEEK, AREA_INFLUENCE_DAY
+    TABLEHOME_WEEK, TABLEHOME_DAY, AREA_INFLUENCE_WEEK, AREA_INFLUENCE_DAY, HOMEZONE_WHEEL
 } from '../../constants/apis';
 
 
@@ -46,6 +47,7 @@ export function setChosenLocation(data, selectedDay){
             dispatch(getDataTableHome(`${TABLEHOME_DAY}/${longAddress}/${latAddress}/${day}`));
             dispatch(getDataTop(topChart));
             dispatch(getAreaInfluence(`${AREA_INFLUENCE_DAY}/${longAddress}/${latAddress}/${day}`));
+            dispatch(getHomeZoneWheelPlot(`${HOMEZONE_WHEEL}/${longAddress}/${latAddress}/${day}`));
         }
     }
 }
@@ -100,6 +102,18 @@ function getAreaInfluence(API_Url){
             dispatch({ type: GET_AREA_INFLUENCE_SUCCESS, payload: areaInfluence.data });   
         } catch (error) {
             dispatch({ type: GET_AREA_INFLUENCE_FAILURE, payload: error });
+        }
+    }
+}
+
+function getHomeZoneWheelPlot(API_Url){
+    return async (dispatch) => {
+        dispatch({ type: GET_HOMEZONE_WHEEL_REQUEST });
+        try {
+            const dataHomeZoneWheel = await axios.get(API_Url);
+            dispatch({ type: GET_HOMEZONE_WHEEL_SUCCESS, payload: dataHomeZoneWheel.data });   
+        } catch (error) {
+            dispatch({ type: GET_HOMEZONE_WHEEL_FAILURE, payload: error });
         }
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Paper, Typography } from '@material-ui/core';
+import { Grid, Paper, Typography, Button } from '@material-ui/core';
 
 //Components
 import TableBBB from '../../molecules/Table';
@@ -9,7 +9,7 @@ import Spinner from '../../atoms/Spinner';
 import HBarChart from '../../molecules/HBarChart';
 import PieChart from '../../molecules/PieChart';
 import DoughnutChart from '../../molecules/DoughnutChart';
-
+import Modal from '../../organisms/Modal';
 //Styles
 import { styles } from './styles';
 
@@ -32,7 +32,7 @@ class RightContent extends Component {
 
   render(){
 
-    const { classes, dataTH, dataTC, dataAI } = this.props;
+    const { classes, dataTH, dataTC, dataAI, dataHW } = this.props;
   
     return (
         <Grid item sm={12} className={classes.grid}>
@@ -48,12 +48,25 @@ class RightContent extends Component {
                 <Typography variant="h4" noWrap>
                   AREA OF INFLUENCE
                 </Typography>
-                <Typography variant="subtitle2" noWrap>
+                <Typography variant="subtitle2" style={{ textAlign: 'center' }} noWrap>
                   {dataAI[0].area} km<sup>2</sup>
                 </Typography>
               </Fragment> : <Spinner size={40} />
           }
-            </Paper>
+          </Paper>
+
+          {
+            Object.keys(dataHW).length ? 
+            <Paper className={classes.paper}>
+              <Button onClick={this.handleOpen}>Open HomeZone Wheel</Button>
+              <Modal 
+                open={this.state.open}
+                handleClose={this.handleClose}
+                dataHW={dataHW}
+              />
+            </Paper> 
+            : ''
+          }
           <Paper className={classes.paper}>
             <PieChart />
           </Paper>
@@ -79,7 +92,8 @@ RightContent.propTypes = {
     classes: PropTypes.object.isRequired,
     dataTH: PropTypes.object.isRequired,
     dataTC: PropTypes.object.isRequired,
-    dataAI: PropTypes.object.isRequired
+    dataAI: PropTypes.object.isRequired,
+    dataHW: PropTypes.object.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(RightContent);

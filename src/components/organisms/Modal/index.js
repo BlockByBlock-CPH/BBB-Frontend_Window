@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, Modal, Icon } from '@material-ui/core';
+import { Paper, Modal, Icon, Typography } from '@material-ui/core';
 import  { Clear } from '@material-ui/icons';
 
 //Components
-import HBarChart from '../../molecules/HBarChart';
 import Spinner from '../../atoms/Spinner';
+import WheelPlot from '../../molecules/WheelPlot';
 
 //Styles
 import { styles } from './styles';
 
 
-const ModalTop = (props) => {
+const ModalComponent = (props) => {
 
-    const { classes, dataTC, open, handleClose } = props;
+    const { classes, dataHW, open, handleClose } = props;
 
     return (
         <Modal
@@ -30,15 +30,12 @@ const ModalTop = (props) => {
                         <Clear className={classes.icon}/>
                     </Icon>
                 </div>
+                <Typography variant="subtitle2" style={{ textAlign: 'center' }} noWrap>
+                  HOMEZONE WHEEL
+                </Typography>
                 <Paper className={classes.Paper}>
                 {
-                    Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop1} /> : <Spinner size={40} />
-                }
-                </Paper>
-                <div className={classes.separate} />
-                <Paper className={classes.Paper}>
-                {
-                    Object.keys(dataTC).length ? <HBarChart dataTC={dataTC.dataChartTop2} /> : <Spinner size={40} />
+                    Object.keys(dataHW).length ? <WheelPlot dataHW={dataHW}/> : <Spinner size={40} />
                 }
                 </Paper>
             </div>
@@ -46,9 +43,9 @@ const ModalTop = (props) => {
     );
 }
 
-ModalTop.propTypes = {
+ModalComponent.propTypes = {
     classes: PropTypes.object.isRequired,
-    dataTC: PropTypes.object.isRequired
+    dataHW: PropTypes.object.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(ModalTop);
+export default withStyles(styles, { withTheme: true })(ModalComponent);

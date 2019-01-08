@@ -7,6 +7,7 @@ const getSelectedDay = (address) => address.selectedInfo.selectedDay;
 const getTableHome = (address) => address.tableHome;
 const getDataTop = (address) => address.dataTop;
 const getAreaInfluence = (address) => address.areaInfluence;
+const getHomeZoneWheelPlot = (address) => address.dataHomeZoneWheel;
 
 // reselect functions
 export const getCoordAddressState = createSelector(
@@ -37,4 +38,9 @@ export const getDataTopState = createSelector(
 export const getAreaInfluenceState = createSelector(
   [ getAreaInfluence ],
   (areaInfluence) => areaInfluence
+)
+
+export const getHomeZoneWheelPlotState = createSelector(
+  [ getHomeZoneWheelPlot ],
+  (dataHomeZoneWheel) => dataHomeZoneWheel
 )
