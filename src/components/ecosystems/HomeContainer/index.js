@@ -23,7 +23,8 @@ import {
     getMainChartState, 
     getSelectedDayState, 
     getTableHomeState, 
-    getDataTopState
+    getDataTopState,
+    getAreaInfluenceState
 } from '../../../redux/selectors/address_selector';
 
 //Styles
@@ -45,6 +46,7 @@ class HomeContainer extends Component {
           dataMC: {},
           dataTH: {},
           dataTC: {},
+          dataAI: {},
           loading: true,
           addressInfo: {},
           selectedAddress: false,
@@ -73,6 +75,8 @@ class HomeContainer extends Component {
             this.dataTableHome(this.props.tableHome);
         } else if(this.props.dataTop !== prevProps.dataTop){
             this.dataTop(this.props.dataTop);
+        } else if(this.props.areaInfluence !== prevProps.areaInfluence){
+            this.areaInfluence(this.props.areaInfluence);
         }
     }
 
@@ -146,10 +150,10 @@ class HomeContainer extends Component {
         let dataMC = Object.assign({}, data);
             
         if(this.props.selectedDay > 0){    
-            this.setState({ dataMC: dataMC });
+            this.setState({ dataMC });
         }else if(this.props.selectedDay === 0){
             dataMC.title = { "0": "DAYS OF THE WEEK" };
-            this.setState({ dataMC: dataMC });
+            this.setState({ dataMC });
         }        
     }
 
@@ -165,7 +169,7 @@ class HomeContainer extends Component {
         }else if(this.props.selectedDay === 0){
             dataTH.th = ["","DAY","PEOPLE"];        
         };        
-        this.setState({ dataTH: dataTH });
+        this.setState({ dataTH });
     }
 
     /**
@@ -178,6 +182,15 @@ class HomeContainer extends Component {
         dataChartTop1.title = { "0": "TOP 5 MAX PEOPLE BY ZONE"};
         dataChartTop2.title = { "0": "TOP 5 MIN PEOPLE BY ZONE"};
         this.setState({ dataTC: { dataChartTop1, dataChartTop2 }});
+    }
+
+    /**
+     * @param data: areaInfluence state from redux
+     * @description recieve areaInfluence state and prepare that information to send it as props to show the info about area of influence.
+     */
+    areaInfluence = (data) => {
+        const dataAI = data;
+        this.setState({ dataAI });
     }
 
     /**
@@ -260,7 +273,7 @@ class HomeContainer extends Component {
         
         const { classes, setInitMap, initialMap, coordAddress  } = this.props;
         const { anchorLeft, openLeft, anchorRight, openRight, appTitleHeader, titleRP, loading, 
-                dataMC, dataTH, dataTC, searchedAddress, suggestions, listActive, selectedDay,
+                dataMC, dataTH, dataTC, dataAI, searchedAddress, suggestions, listActive, selectedDay,
                 selectedAddress, polygonZone, totalDataMC, totalDataTH } = this.state;
 
         if(loading === true){
@@ -322,6 +335,7 @@ class HomeContainer extends Component {
                                 open={openRight} 
                                 dataTH={dataTH}
                                 dataTC={dataTC}
+                                dataAI={dataAI}
                                 totalDataTH={totalDataTH}
                             /> 
                     }
@@ -351,7 +365,8 @@ function mapStateToProps({ address, map }) {
         mainChart: getMainChartState(address),
         selectedDay: getSelectedDayState(address),
         tableHome: getTableHomeState(address),
-        dataTop: getDataTopState(address)
+        dataTop: getDataTopState(address),
+        areaInfluence: getAreaInfluenceState(address)
     }
 }
 

@@ -6,6 +6,7 @@ const getMainChart = (address) => address.mainChart;
 const getSelectedDay = (address) => address.selectedInfo.selectedDay;
 const getTableHome = (address) => address.tableHome;
 const getDataTop = (address) => address.dataTop;
+const getAreaInfluence = (address) => address.areaInfluence;
 
 // reselect functions
 export const getCoordAddressState = createSelector(
@@ -31,4 +32,9 @@ export const getTableHomeState = createSelector(
 export const getDataTopState = createSelector(
   [ getDataTop ],
   (dataTop) => dataTop
+)
+
+export const getAreaInfluenceState = createSelector(
+  [ getAreaInfluence ],
+  (areaInfluence) => areaInfluence
 )

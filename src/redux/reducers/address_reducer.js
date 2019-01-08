@@ -1,7 +1,9 @@
 import{ 
-    SELECTED_INFO, GET_MAIN_CHART_REQUEST, GET_MAIN_CHART_SUCCESS, GET_MAIN_CHART_FAILURE,
+    SELECTED_INFO, 
+    GET_MAIN_CHART_REQUEST, GET_MAIN_CHART_SUCCESS, GET_MAIN_CHART_FAILURE,
     GET_TABLE_HOME_REQUEST,GET_TABLE_HOME_SUCCESS, GET_TABLE_HOME_FAILURE,
-    GET_TOP_REQUEST, GET_TOP_SUCCESS, GET_TOP_FAILURE
+    GET_TOP_REQUEST, GET_TOP_SUCCESS, GET_TOP_FAILURE,
+    GET_AREA_INFLUENCE_REQUEST, GET_AREA_INFLUENCE_SUCCESS, GET_AREA_INFLUENCE_FAILURE
 
 } from '../../constants/action_types';
   
@@ -14,6 +16,7 @@ const initialState = {
     mainChart: {},
     tableHome: [],
     dataTop: {},
+    areaInfluence: {},
     loading: false,
     loaded: false,
     error: null
@@ -95,6 +98,30 @@ const initialState = {
                 }   
     
             case GET_TOP_FAILURE:
+                return {
+                    ...state,
+                    loading: false,
+                    loaded: true,
+                    error: payload
+                }
+            
+            case GET_AREA_INFLUENCE_REQUEST:    
+                return {
+                    ...state,
+                    loading: true,
+                    loaded: false
+                }
+    
+            case GET_AREA_INFLUENCE_SUCCESS:
+                return {
+                    ...state,
+                    areaInfluence: payload,
+                    loading: false,
+                    loaded: true,
+                    error: null
+                }   
+    
+            case GET_AREA_INFLUENCE_FAILURE:
                 return {
                     ...state,
                     loading: false,

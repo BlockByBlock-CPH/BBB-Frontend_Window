@@ -40,11 +40,21 @@ export const theme = createMuiTheme({
           fontWeight: 500,
         },
         h4: {
-            color: grey[200],
+            fontSize: 12,
+            color: grey[200]
+        },
+        title: {
+            fontSize: 10,
+            color: grey[200]
         },
         subtitle1: {
-          fontSize: 12,
-          color: grey[200]
+            fontSize: 12,
+            color: grey[200]
+        },
+        subtitle2: {
+            fontSize: 20,
+            color: grey[200],
+            fontWeight: 800
         },
         button: {
           

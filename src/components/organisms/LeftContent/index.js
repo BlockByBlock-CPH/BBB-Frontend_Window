@@ -4,8 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { Grid, Paper } from '@material-ui/core';
 
 //Components
-import PieChart from '../../molecules/PieChart';
-import DoughnutChart from '../../molecules/DoughnutChart';
 import Filters from '../../molecules/Filters';
 
 //Styles
@@ -23,12 +21,6 @@ const LeftContent = (props) => {
                     handleChangeSelecteDay={handleChangeSelecteDay} 
                     selectedDay={selectedDay} 
                 />
-            </Paper>
-            <Paper className={classes.paper}>
-                <PieChart />
-            </Paper>
-            <Paper className={classes.paper}>
-                <DoughnutChart />
             </Paper>
         </Grid> 
     )
