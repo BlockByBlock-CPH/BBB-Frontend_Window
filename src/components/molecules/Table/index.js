@@ -33,7 +33,7 @@ const TableBBB = (props) => {
                 dataTH.td.map(row => {
                     return (
                         <TableRow key={row.id}>
-                            <TableCell className={classes.tableCell} component="th" scope="row">
+                            <TableCell className={classes.tableCell} scope="row">
                             { 
                                 row.id === 1 ? <div><ArrowUpward /><PermIdentity /></div> : <div><ArrowDownward /><PermIdentity /></div>
                             }

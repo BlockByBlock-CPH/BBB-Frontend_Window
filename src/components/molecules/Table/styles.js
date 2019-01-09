@@ -8,7 +8,7 @@ export const styles = () => ({
     tableHead: {
         padding: '5px',
         fontWeight: 800,
-        textAlign: 'left',
+        textAlign: 'right',
     },
     tableCell: {
         padding: '5px'
