@@ -7,7 +7,7 @@ import './styles.css';
 class WheelPlot extends Component {
 
     componentDidMount() {
-        drawPlot(this.props.dataHW, this.wheelPlot);
+        drawPlot(this.props.dataHomeZoneWheel, this.wheelPlot);
     }
     
     render() {

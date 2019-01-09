@@ -34,6 +34,7 @@ export function setChosenLocation(data, selectedDay){
             dispatch(getDataTableHome(`${TABLEHOME_WEEK}/${longAddress}/${latAddress}`));
             dispatch(getDataTop(topChart));
             dispatch(getAreaInfluence(`${AREA_INFLUENCE_WEEK}/${longAddress}/${latAddress}`));
+            dispatch(getHomeZoneWheelPlot(''));
 
         }else if(day > 0){
             const topChart = [`${TOP_CHART1_DAY}/${day}`,`${TOP_CHART2_DAY}/${day}`];
@@ -107,11 +108,16 @@ function getAreaInfluence(API_Url){
 }
 
 function getHomeZoneWheelPlot(API_Url){
+    const lenURL = parseInt(API_Url.length,10);
     return async (dispatch) => {
         dispatch({ type: GET_HOMEZONE_WHEEL_REQUEST });
         try {
-            const dataHomeZoneWheel = await axios.get(API_Url);
-            dispatch({ type: GET_HOMEZONE_WHEEL_SUCCESS, payload: dataHomeZoneWheel.data });   
+            if(lenURL > 0){
+                const dataHomeZoneWheel = await axios.get(API_Url);
+                dispatch({ type: GET_HOMEZONE_WHEEL_SUCCESS, payload: dataHomeZoneWheel.data });
+            }else {
+                dispatch({ type: GET_HOMEZONE_WHEEL_SUCCESS, payload: {} });
+            }
         } catch (error) {
             dispatch({ type: GET_HOMEZONE_WHEEL_FAILURE, payload: error });
         }

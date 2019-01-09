@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Drawer, SnackbarContent } from '@material-ui/core';
-import InfoIcon from '@material-ui/icons/Info';
+import { Drawer } from '@material-ui/core';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 //Components
@@ -13,7 +11,7 @@ import RightContent from '../../organisms/RightContent';
 import { styles } from './styles';
 
 const DrawerRight = (props) => {
-    const { classes, anchor, open, dataTH, dataTC, dataAI, dataHW, totalDataTH } = props;
+    const { classes, anchor, open, dataTH, dataTC, areaInfluence, dataHomeZoneWheel } = props;
     return (
         <Drawer
             variant="persistent"
@@ -23,29 +21,14 @@ const DrawerRight = (props) => {
                 paper: classes.drawerPaperRight,
             }}
         >
-            {
-                totalDataTH > 0 ?
-                <Scrollbars>
-                    <RightContent 
-                        dataTH={dataTH} 
-                        dataTC={dataTC}
-                        dataAI={dataAI}
-                        dataHW={dataHW}
-                    /> 
-                </Scrollbars>
-                :
-                <SnackbarContent
-                    className={classes.info}
-                    aria-describedby="client-snackbar"
-                    message={
-                        <span id="client-snackbar" className={classes.message}>
-                        <InfoIcon className={classNames(classes.icon, classes.iconVariant)} />
-                        There are not any information about this address!
-                        </span>
-                    }
-                />
-            }
-    
+            <Scrollbars>
+                <RightContent 
+                    dataTH={dataTH} 
+                    dataTC={dataTC}
+                    areaInfluence={areaInfluence}
+                    dataHomeZoneWheel={dataHomeZoneWheel}
+                /> 
+            </Scrollbars>    
         </Drawer>
     )
 }
@@ -57,8 +40,8 @@ DrawerRight.propTypes = {
     open: PropTypes.bool.isRequired,
     dataTH: PropTypes.object.isRequired,
     dataTC: PropTypes.object.isRequired,
-    dataAI: PropTypes.object.isRequired,
-    dataHW: PropTypes.object.isRequired
+    areaInfluence: PropTypes.object.isRequired,
+    dataHomeZoneWheel: PropTypes.object.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(DrawerRight);

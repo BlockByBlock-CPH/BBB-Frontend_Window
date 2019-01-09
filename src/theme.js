@@ -41,7 +41,8 @@ export const theme = createMuiTheme({
         },
         h4: {
             fontSize: 12,
-            color: grey[200]
+            color: grey[400],
+            fontWeight: 800
         },
         title: {
             fontSize: 10,
@@ -107,6 +108,11 @@ export const theme = createMuiTheme({
                 flexDirection: 'initial',
                 marginTop: '0 !important',
                 marginBottom: '10px !important'
+            }
+        },
+        MuiTableRow: {
+            root: {
+                height: 40+'px !important'
             }
         },
         MuiTableCell: {

@@ -47,14 +47,12 @@ class HomeContainer extends Component {
           dataMC: {},
           dataTH: {},
           dataTC: {},
-          dataAI: {},
-          dataHW: {},
+        //   dataAI: {},
+        //   dataHW: {},
           loading: true,
           addressInfo: {},
           selectedAddress: false,
-          polygonZone: [],
-          totalDataMC: 1,
-          totalDataTH: 1,
+          //polygonZone: [],
           searchedAddress: '',
           suggestions: [],
           listActive: false,
@@ -77,11 +75,14 @@ class HomeContainer extends Component {
             this.dataTableHome(this.props.tableHome);
         } else if(this.props.dataTop !== prevProps.dataTop){
             this.dataTop(this.props.dataTop);
-        } else if(this.props.areaInfluence !== prevProps.areaInfluence){
-            this.areaInfluence(this.props.areaInfluence);
-        } else if(this.props.dataHomeZoneWheel !== prevProps.dataHomeZoneWheel){
-            this.homezoneWheel(this.props.dataHomeZoneWheel);
-        }
+        } 
+        // else if(this.props.areaInfluence !== prevProps.areaInfluence){
+        //     this.areaInfluence(this.props.areaInfluence);
+        // } 
+        // else if(this.state.selectedDay !== prevState.selectedDay){
+        //     console.log("this.props.dataHomeZoneWheel: ",this.props.dataHomeZoneWheel);
+        //     // this.homezoneWheel(this.props.dataHomeZoneWheel);
+        // }
     }
 
     /** 
@@ -192,19 +193,22 @@ class HomeContainer extends Component {
      * @param data: areaInfluence state from redux
      * @description recieve areaInfluence state and prepare that information to send it as props to show the info about area of influence.
      */
-    areaInfluence = (data) => {
-        const dataAI = data;
-        this.setState({ dataAI });
-    }
+    // areaInfluence = (data) => {
+    //     const dataAI = data;
+    //     this.setState({ dataAI });
+    // }
 
     /**
      * @param data: homezoneWheel state from redux
      * @description recieve homezoneWheel state and prepare that information to send it as props to show the Homezone Wheel Plot.
      */
-    homezoneWheel = (data) => {
-        const dataHW = data;
-        this.setState({ dataHW });
-    }
+    // homezoneWheel = (data) => {
+    //     const dataHW = data;
+    //     this.setState({ dataHW },
+    //         () => {
+    //             console.log("dataHW: ", dataHW);
+    //         });
+    // }
 
     /**
      * @param none
@@ -279,15 +283,15 @@ class HomeContainer extends Component {
         this.setState({
             searched: true,
             listActive: true
-        });        
+        });
     }
 
     render() {
         
-        const { classes, setInitMap, initialMap, coordAddress  } = this.props;
+        const { classes, setInitMap, initialMap, coordAddress, areaInfluence, dataHomeZoneWheel  } = this.props;
         const { anchorLeft, openLeft, anchorRight, openRight, appTitleHeader, titleRP, loading, 
-                dataMC, dataTH, dataTC, dataAI, dataHW, searchedAddress, suggestions, listActive, selectedDay,
-                selectedAddress, polygonZone, totalDataMC, totalDataTH } = this.state;
+                dataMC, dataTH, dataTC, searchedAddress, suggestions, listActive, selectedDay,
+                selectedAddress, polygonZone } = this.state;
 
         if(loading === true){
             return (
@@ -335,9 +339,8 @@ class HomeContainer extends Component {
                             setInitMap={setInitMap}
                             coordAddress={coordAddress}
                             initialMap={initialMap}
-                            dataMC={dataMC}
-                            polygonZone={polygonZone}
-                            totalDataMC={totalDataMC}
+                            //dataMC={dataMC}
+                            //polygonZone={polygonZone} // ENVIAR Polygon para generar el circulo(polygono) original
                         />
                     </main>
                     { 
@@ -348,9 +351,8 @@ class HomeContainer extends Component {
                                 open={openRight} 
                                 dataTH={dataTH}
                                 dataTC={dataTC}
-                                dataAI={dataAI}
-                                dataHW={dataHW}
-                                totalDataTH={totalDataTH}
+                                areaInfluence={areaInfluence}
+                                dataHomeZoneWheel={dataHomeZoneWheel}                                
                             /> 
                     }
                 </div>
@@ -362,21 +364,23 @@ class HomeContainer extends Component {
 HomeContainer.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
-    coordAddress: PropTypes.object.isRequired,
+    setChosenLocation: PropTypes.func.isRequired,
+    setInitMap: PropTypes.func.isRequired,
     initialMap: PropTypes.object.isRequired,
-    mainChart: PropTypes.object.isRequired,
+    coordAddress: PropTypes.object.isRequired,
+    //mainChart: PropTypes.object.isRequired,
     selectedDay: PropTypes.number.isRequired,
     tableHome: PropTypes.array.isRequired,
     dataTop: PropTypes.object.isRequired,
-    setInitMap: PropTypes.func.isRequired,
-    setChosenLocation: PropTypes.func.isRequired
+    areaInfluence: PropTypes.object.isRequired,
+    dataHomeZoneWheel: PropTypes.object.isRequired
 };
   
 function mapStateToProps({ address, map }) {
     return {
         initialMap: map.initialMap,
         coordAddress: getCoordAddressState(address),
-        mainChart: getMainChartState(address),
+        //mainChart: getMainChartState(address),
         selectedDay: getSelectedDayState(address),
         tableHome: getTableHomeState(address),
         dataTop: getDataTopState(address),

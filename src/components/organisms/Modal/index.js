@@ -14,7 +14,7 @@ import { styles } from './styles';
 
 const ModalComponent = (props) => {
 
-    const { classes, dataHW, open, handleClose } = props;
+    const { classes, dataHomeZoneWheel, open, handleClose } = props;
 
     return (
         <Modal
@@ -35,7 +35,7 @@ const ModalComponent = (props) => {
                 </Typography>
                 <Paper className={classes.Paper}>
                 {
-                    Object.keys(dataHW).length ? <WheelPlot dataHW={dataHW}/> : <Spinner size={40} />
+                    Object.keys(dataHomeZoneWheel).length ? <WheelPlot dataHomeZoneWheel={dataHomeZoneWheel}/> : <Spinner size={40} />
                 }
                 </Paper>
             </div>
@@ -45,7 +45,9 @@ const ModalComponent = (props) => {
 
 ModalComponent.propTypes = {
     classes: PropTypes.object.isRequired,
-    dataHW: PropTypes.object.isRequired
+    dataHomeZoneWheel: PropTypes.object.isRequired,
+    open: PropTypes.bool.isRequired,
+    handleClose: PropTypes.func.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(ModalComponent);
