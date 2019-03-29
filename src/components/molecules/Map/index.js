@@ -11,7 +11,10 @@ import { defaults as defaultInteractions } from 'ol/interaction';
 import { transform } from 'ol/proj';
 import * as turf from '@turf/turf';
 
-import { access_tokenDark, access_tokenLight } from './token_map';
+import { 
+    access_tokenDark, 
+//    access_tokenLight 
+} from './token_map';
 
 //Styles
 import './styles.css';

@@ -30,7 +30,7 @@ export function setChosenLocation(data, selectedDay){
                 selectedDay: day
             };
             dispatch({ type: SELECTED_INFO, payload: selectedInfo });
-            dispatch(getDataMainChart(MAIN_CHART_WEEK));
+            dispatch(getDataMainChart(`${MAIN_CHART_WEEK}/${longAddress}/${latAddress}`));
             dispatch(getDataTableHome(`${TABLEHOME_WEEK}/${longAddress}/${latAddress}`));
             dispatch(getDataTop(topChart));
             dispatch(getAreaInfluence(`${AREA_INFLUENCE_WEEK}/${longAddress}/${latAddress}`));
@@ -44,8 +44,8 @@ export function setChosenLocation(data, selectedDay){
                 selectedDay: day
             };
             dispatch({ type: SELECTED_INFO, payload: selectedInfo });
-            dispatch(getDataMainChart(MAIN_CHART_DAY));
-            dispatch(getDataTableHome(`${TABLEHOME_DAY}/${longAddress}/${latAddress}/${day}`));
+            dispatch(getDataMainChart(`${MAIN_CHART_DAY}/${day}/${longAddress}/${latAddress}`));
+            dispatch(getDataTableHome(`${TABLEHOME_DAY}/${day}/${longAddress}/${latAddress}`));
             dispatch(getDataTop(topChart));
             dispatch(getAreaInfluence(`${AREA_INFLUENCE_DAY}/${longAddress}/${latAddress}/${day}`));
             dispatch(getHomeZoneWheelPlot(`${HOMEZONE_WHEEL}/${longAddress}/${latAddress}/${day}`));
